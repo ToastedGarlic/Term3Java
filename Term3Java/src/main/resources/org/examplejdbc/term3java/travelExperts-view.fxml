@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.TravelExpertsController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
@@ -40,19 +39,20 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView prefHeight="477.0" prefWidth="916.0">
+                                <TableView fx:id="tvCustomer" prefHeight="477.0" prefWidth="916.0">
                                     <columns>
-                                        <TableColumn fx:id="tcCustomerId" prefWidth="75.0" text="Customer Id" />
-                                        <TableColumn fx:id="tcCustFirstName" prefWidth="75.0" text="First Name" />
-                                        <TableColumn fx:id="tcCustLastName" prefWidth="75.0" text="Last Name" />
-                                        <TableColumn fx:id="tcCustAddress" prefWidth="75.0" text="Address" />
-                                        <TableColumn fx:id="tcCustCity" prefWidth="75.0" text="City" />
-                                        <TableColumn fx:id="tcCustPostal" prefWidth="75.0" text="Province" />
-                                        <TableColumn fx:id="CustPostal" prefWidth="75.0" text="Postal Code" />
-                                        <TableColumn fx:id="tcCustCountry" prefWidth="75.0" text="Country" />
-                                        <TableColumn fx:id="tcCustHomePhone" prefWidth="75.0" text="Home Phone" />
-                                        <TableColumn fx:id="tcCustBusPhone" prefWidth="75.0" text="Business Phone" />
-                                        <TableColumn fx:id="tcCustEmail" prefWidth="75.0" text="Email" />
+                                        <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer Id" />
+                                        <TableColumn fx:id="colCustFirstName" prefWidth="75.0" text="First Name" />
+                                        <TableColumn fx:id="colCustLastName" prefWidth="75.0" text="Last Name" />
+                                        <TableColumn fx:id="colCustAddress" prefWidth="75.0" text="Address" />
+                                        <TableColumn fx:id="colCustCity" prefWidth="75.0" text="City" />
+                                        <TableColumn fx:id="colProvince" prefWidth="75.0" text="Province" />
+                                        <TableColumn fx:id="colCustPostal" prefWidth="75.0" text="Postal Code" />
+                                        <TableColumn fx:id="colCustCountry" prefWidth="75.0" text="Country" />
+                                        <TableColumn fx:id="colCustHomePhone" prefWidth="75.0" text="Home Phone" />
+                                        <TableColumn fx:id="colCustBusPhone" prefWidth="75.0" text="Business Phone" />
+                                        <TableColumn fx:id="colCustEmail" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="colAgentId" prefWidth="75.0" text="Column X" />
                                     </columns>
                                 </TableView>
                             </children>

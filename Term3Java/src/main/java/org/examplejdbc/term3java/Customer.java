@@ -9,6 +9,7 @@ public class Customer {
     private SimpleStringProperty custLastName;
     private SimpleStringProperty custAddress;
     private SimpleStringProperty custCity;
+    private SimpleStringProperty custProv;
     private SimpleStringProperty custPostal;
     private SimpleStringProperty custCountry;
     private SimpleStringProperty custHomePhone;
@@ -17,7 +18,7 @@ public class Customer {
     private SimpleIntegerProperty agentId;
 
     public Customer(int customerId, String custFirstName, String custLastName, String custAddress,
-                    String custCity, String custPostal, String custCountry, String custHomePhone,
+                    String custCity, String custProv, String custPostal, String custCountry, String custHomePhone,
                     String custBusPhone, String custEmail, Integer agentId) {
         this.customerId = new SimpleIntegerProperty(customerId);
         this.custFirstName = new SimpleStringProperty(custFirstName);
@@ -90,6 +91,17 @@ public class Customer {
 
     public void setCustCity(String custCity) {
         this.custCity.set(custCity);
+    }
+    public String getCustProv() {
+        return custProv.get();
+    }
+
+    public SimpleStringProperty custProvProperty() {
+        return custProv;
+    }
+
+    public void setCustProv(String custProv) {
+        this.custProv.set(custProv);
     }
 
     public String getCustPostal() {
