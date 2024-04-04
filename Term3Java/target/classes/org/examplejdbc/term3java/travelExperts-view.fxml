@@ -46,7 +46,7 @@
                                         <TableColumn fx:id="colCustLastName" prefWidth="75.0" text="Last Name" />
                                         <TableColumn fx:id="colCustAddress" prefWidth="75.0" text="Address" />
                                         <TableColumn fx:id="colCustCity" prefWidth="75.0" text="City" />
-                                        <TableColumn fx:id="colProvince" prefWidth="75.0" text="Province" />
+                                        <TableColumn fx:id="colCustProv" prefWidth="75.0" text="Province" />
                                         <TableColumn fx:id="colCustPostal" prefWidth="75.0" text="Postal Code" />
                                         <TableColumn fx:id="colCustCountry" prefWidth="75.0" text="Country" />
                                         <TableColumn fx:id="colCustHomePhone" prefWidth="75.0" text="Home Phone" />

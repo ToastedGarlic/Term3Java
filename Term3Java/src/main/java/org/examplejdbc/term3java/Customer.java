@@ -25,6 +25,7 @@ public class Customer {
         this.custLastName = new SimpleStringProperty(custLastName);
         this.custAddress = new SimpleStringProperty(custAddress);
         this.custCity = new SimpleStringProperty(custCity);
+        this.custProv = new SimpleStringProperty(custProv);
         this.custPostal = new SimpleStringProperty(custPostal);
         this.custCountry = new SimpleStringProperty(custCountry);
         this.custHomePhone = new SimpleStringProperty(custHomePhone);

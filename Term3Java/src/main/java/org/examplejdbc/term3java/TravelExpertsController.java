@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TravelExpertsController {
 
@@ -59,8 +60,8 @@ public class TravelExpertsController {
     @FXML // fx:id="colCustomerId"
     private TableColumn<Customer, Integer> colCustomerId; // Value injected by FXMLLoader
 
-    @FXML // fx:id="colProvince"
-    private TableColumn<Customer, String> colProvince; // Value injected by FXMLLoader
+    @FXML // fx:id="colProv"
+    private TableColumn<Customer, String> colCustProv; // Value injected by FXMLLoader
 
     @FXML // fx:id="tpCustomer"
     private Tab tpCustomer; // Value injected by FXMLLoader
@@ -83,12 +84,24 @@ public class TravelExpertsController {
         assert colCustLastName != null : "fx:id=\"colCustLastName\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
         assert colCustPostal != null : "fx:id=\"colCustPostal\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
         assert colCustomerId != null : "fx:id=\"colCustomerId\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
-        assert colProvince != null : "fx:id=\"colProvince\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
+        assert colCustProv != null : "fx:id=\"colProvince\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
         assert tpCustomer != null : "fx:id=\"tpCustomer\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
         assert tvCustomer != null :  "fx:id=\"tvCustomer\" was not injected: check your FXML file 'travelExperts-view.fxml'.";
 
 
         getCustomerInfo();
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerId"));
+        colCustFirstName.setCellValueFactory(new PropertyValueFactory<Customer, String>("custFirstName"));
+        colCustLastName.setCellValueFactory(new PropertyValueFactory<Customer, String>("custLastName"));
+        colCustAddress.setCellValueFactory(new PropertyValueFactory<Customer, String>("custAddress"));
+        colCustCity.setCellValueFactory(new PropertyValueFactory<Customer, String>("custCity"));
+        colCustProv.setCellValueFactory(new PropertyValueFactory<Customer, String>("custProv"));
+        colCustPostal.setCellValueFactory(new PropertyValueFactory<Customer, String>("custPostal"));
+        colCustCountry.setCellValueFactory(new PropertyValueFactory<Customer, String>("custCountry"));
+        colCustHomePhone.setCellValueFactory(new PropertyValueFactory<Customer, String>("custHomePhone"));
+        colCustBusPhone.setCellValueFactory(new PropertyValueFactory<Customer, String>("custBusPhone"));
+        colCustEmail.setCellValueFactory(new PropertyValueFactory<Customer, String>("custEmail"));
+        colAgentId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("agentId"));
         tvCustomer.setItems(customerList);
     }
 
