@@ -12,10 +12,6 @@ public class TravelExpertsApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(TravelExpertsApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/org/examplejdbc/term3java/MainView.fxml"));
         BorderPane root = mainLoader.load();
         Scene scene = new Scene(root);
