@@ -18,8 +18,8 @@ public class Customer {
     private SimpleIntegerProperty agentId;
 
     public Customer(int customerId, String custFirstName, String custLastName, String custAddress,
-                    String custCity, String custProv, String custPostal, String custCountry, String custHomePhone,
-                    String custBusPhone, String custEmail, Integer agentId) {
+                    String custCity, String custProv, String custPostal, String custCountry,
+                    String custHomePhone, String custBusPhone, String custEmail, int agentId) {
         this.customerId = new SimpleIntegerProperty(customerId);
         this.custFirstName = new SimpleStringProperty(custFirstName);
         this.custLastName = new SimpleStringProperty(custLastName);
@@ -34,12 +34,9 @@ public class Customer {
         this.agentId = new SimpleIntegerProperty(agentId);
     }
 
+    // Getters and setters
     public int getCustomerId() {
         return customerId.get();
-    }
-
-    public SimpleIntegerProperty customerIdProperty() {
-        return customerId;
     }
 
     public void setCustomerId(int customerId) {
@@ -50,20 +47,12 @@ public class Customer {
         return custFirstName.get();
     }
 
-    public SimpleStringProperty custFirstNameProperty() {
-        return custFirstName;
-    }
-
     public void setCustFirstName(String custFirstName) {
         this.custFirstName.set(custFirstName);
     }
 
     public String getCustLastName() {
         return custLastName.get();
-    }
-
-    public SimpleStringProperty custLastNameProperty() {
-        return custLastName;
     }
 
     public void setCustLastName(String custLastName) {
@@ -74,10 +63,6 @@ public class Customer {
         return custAddress.get();
     }
 
-    public SimpleStringProperty custAddressProperty() {
-        return custAddress;
-    }
-
     public void setCustAddress(String custAddress) {
         this.custAddress.set(custAddress);
     }
@@ -86,19 +71,12 @@ public class Customer {
         return custCity.get();
     }
 
-    public SimpleStringProperty custCityProperty() {
-        return custCity;
-    }
-
     public void setCustCity(String custCity) {
         this.custCity.set(custCity);
     }
+
     public String getCustProv() {
         return custProv.get();
-    }
-
-    public SimpleStringProperty custProvProperty() {
-        return custProv;
     }
 
     public void setCustProv(String custProv) {
@@ -109,20 +87,12 @@ public class Customer {
         return custPostal.get();
     }
 
-    public SimpleStringProperty custPostalProperty() {
-        return custPostal;
-    }
-
     public void setCustPostal(String custPostal) {
         this.custPostal.set(custPostal);
     }
 
     public String getCustCountry() {
         return custCountry.get();
-    }
-
-    public SimpleStringProperty custCountryProperty() {
-        return custCountry;
     }
 
     public void setCustCountry(String custCountry) {
@@ -133,20 +103,12 @@ public class Customer {
         return custHomePhone.get();
     }
 
-    public SimpleStringProperty custHomePhoneProperty() {
-        return custHomePhone;
-    }
-
     public void setCustHomePhone(String custHomePhone) {
         this.custHomePhone.set(custHomePhone);
     }
 
     public String getCustBusPhone() {
         return custBusPhone.get();
-    }
-
-    public SimpleStringProperty custBusPhoneProperty() {
-        return custBusPhone;
     }
 
     public void setCustBusPhone(String custBusPhone) {
@@ -157,10 +119,6 @@ public class Customer {
         return custEmail.get();
     }
 
-    public SimpleStringProperty custEmailProperty() {
-        return custEmail;
-    }
-
     public void setCustEmail(String custEmail) {
         this.custEmail.set(custEmail);
     }
@@ -169,11 +127,56 @@ public class Customer {
         return agentId.get();
     }
 
-    public SimpleIntegerProperty agentIdProperty() {
-        return agentId;
-    }
-
     public void setAgentId(int agentId) {
         this.agentId.set(agentId);
+    }
+
+    // Property getters
+    public SimpleIntegerProperty customerIdProperty() {
+        return customerId;
+    }
+
+    public SimpleStringProperty custFirstNameProperty() {
+        return custFirstName;
+    }
+
+    public SimpleStringProperty custLastNameProperty() {
+        return custLastName;
+    }
+
+    public SimpleStringProperty custAddressProperty() {
+        return custAddress;
+    }
+
+    public SimpleStringProperty custCityProperty() {
+        return custCity;
+    }
+
+    public SimpleStringProperty custProvProperty() {
+        return custProv;
+    }
+
+    public SimpleStringProperty custPostalProperty() {
+        return custPostal;
+    }
+
+    public SimpleStringProperty custCountryProperty() {
+        return custCountry;
+    }
+
+    public SimpleStringProperty custHomePhoneProperty() {
+        return custHomePhone;
+    }
+
+    public SimpleStringProperty custBusPhoneProperty() {
+        return custBusPhone;
+    }
+
+    public SimpleStringProperty custEmailProperty() {
+        return custEmail;
+    }
+
+    public SimpleIntegerProperty agentIdProperty() {
+        return agentId;
     }
 }

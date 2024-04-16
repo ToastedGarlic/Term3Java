@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.MainController">
+    <top>
+        <!-- MenuBar with MenuItems. Actions should be handled in the MainController -->
+    </top>
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Customers" fx:id="tpCustomer">
+                    <!-- Content loaded by the controller -->
+                </Tab>
+                <Tab text="Packages" fx:id="tpPackages">
+                    <!-- Content loaded by the controller -->
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
