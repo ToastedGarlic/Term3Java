@@ -5,8 +5,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="467.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.AgentController">
+<?import javafx.scene.layout.BorderPane?>
+<AnchorPane prefHeight="467.0" prefWidth="657.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.examplejdbc.term3java.AgentController">
     <children>
+
         <TableView fx:id="tvAgents" prefHeight="390.0" prefWidth="659.0">
             <columns>
                 <TableColumn fx:id="colAgentId" prefWidth="68.33331298828125" text="Agent Id" />
@@ -19,9 +21,6 @@
                 <TableColumn fx:id="colAgencyId" prefWidth="73.0" text="Agency Id" />
             </columns>
         </TableView>
-        <Button fx:id="btnSave" layoutX="66.0" layoutY="404.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Save" />
-        <Button fx:id="btnAdd" layoutX="206.0" layoutY="404.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Add" />
-        <Button fx:id="btnEdit" layoutX="387.0" layoutY="404.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="Edit" />
-        <Button fx:id="btnDelete" layoutX="490.0" layoutY="404.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="btnAdd" layoutX="227.0" layoutY="411.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text=" Add an Agent" />
     </children>
 </AnchorPane>

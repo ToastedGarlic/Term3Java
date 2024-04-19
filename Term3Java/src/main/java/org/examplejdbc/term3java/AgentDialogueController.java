@@ -1,5 +1,5 @@
 /**
- * Sample Skeleton for 'agentdialogue.fxml' Controller Class
+ * Sample Skeleton for 'agentdialogue-view.fxml' Controller Class
  */
 
 package org.examplejdbc.term3java;
@@ -14,10 +14,7 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -31,6 +28,9 @@ public class AgentDialogueController {
 
     @FXML // fx:id="tfAgentId"
     private TextField tfAgentId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="lblMode"
+    private Label lblmode; // Value injected by FXMLLoader
 
     @FXML // fx:id="tfAgtFirstName"
     private TextField tfAgtFirstName; // Value injected by FXMLLoader
@@ -69,18 +69,21 @@ public class AgentDialogueController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtMiddleInitial != null : "fx:id=\"tfAgtMiddleInitial\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtLastName != null : "fx:id=\"tfAgtLastName\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtBusPhone != null : "fx:id=\"tfAgtBusPhone\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtEmail != null : "fx:id=\"tfAgtEmail\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgtPosition != null : "fx:id=\"tfAgtPosition\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert tfAgencyId != null : "fx:id=\"tfAgencyId\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert btnSave != null : "fx:id=\"btnSave\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert btnDelete != null : "fx:id=\"btnDelete\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'agentdialogue.fxml'.";
-        assert lblMode != null : "fx:id=\"lblMode\" was not injected: check your FXML file 'agentdialogue.fxml'.";
+        assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgtMiddleInitial != null : "fx:id=\"tfAgtMiddleInitial\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert lblmode != null : "fx:id=\"lblmode\" was not injected: check your FXML file 'dialog-view.fxml'.";
+        assert tfAgtLastName != null : "fx:id=\"tfAgtLastName\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgtBusPhone != null : "fx:id=\"tfAgtBusPhone\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgtEmail != null : "fx:id=\"tfAgtEmail\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgtPosition != null : "fx:id=\"tfAgtPosition\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert tfAgencyId != null : "fx:id=\"tfAgencyId\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert btnSave != null : "fx:id=\"btnSave\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert btnDelete != null : "fx:id=\"btnDelete\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+        assert lblMode != null : "fx:id=\"lblMode\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
+
+        tfAgentId.setDisable(true);
         btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -154,7 +157,7 @@ public class AgentDialogueController {
                         "`AgtLastName`, `AgtBusPhone`, `AgtEmail`, `AgtPosition`," +
                         " `AgencyId`) VALUES (?,?,?,?,?,?,?)";
             }
-
+             //updating the database with the agent info
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, tfAgtFirstName.getText());
             stmt.setString(2, tfAgtMiddleInitial.getText());
@@ -208,7 +211,7 @@ public class AgentDialogueController {
 
     public void passMode(String mode) {
         this.mode = mode;
-        lblMode.setText(mode);
+        lblmode.setText(mode);
 
         if (mode.equals("add"))
         {

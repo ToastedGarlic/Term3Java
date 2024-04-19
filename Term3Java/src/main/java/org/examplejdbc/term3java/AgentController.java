@@ -1,5 +1,5 @@
 /**
- * Sample Skeleton for 'agentsView.fxml' Controller Class
+ * Sample Skeleton for 'agents-view.fxml' Controller Class
  */
 
 package org.examplejdbc.term3java;
@@ -72,16 +72,16 @@ public class AgentController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert tvAgents != null : "fx:id=\"tvAgents\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colAgentId != null : "fx:id=\"colAgentId\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colFName != null : "fx:id=\"colFName\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colInitial != null : "fx:id=\"colInitial\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colLName != null : "fx:id=\"colLName\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colPhone != null : "fx:id=\"colPhone\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colEmail != null : "fx:id=\"colEmail\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colPosition != null : "fx:id=\"colPosition\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert colAgencyId != null : "fx:id=\"colAgencyId\" was not injected: check your FXML file 'agentsView.fxml'.";
-        assert btnAdd != null : "fx:id=\"btnAdd\" was not injected: check your FXML file 'agentsView.fxml'.";
+        assert tvAgents != null : "fx:id=\"tvAgents\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colAgentId != null : "fx:id=\"colAgentId\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colFName != null : "fx:id=\"colFName\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colInitial != null : "fx:id=\"colInitial\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colLName != null : "fx:id=\"colLName\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colPhone != null : "fx:id=\"colPhone\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colEmail != null : "fx:id=\"colEmail\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colPosition != null : "fx:id=\"colPosition\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert colAgencyId != null : "fx:id=\"colAgencyId\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert btnAdd != null : "fx:id=\"btnAdd\" was not injected: check your FXML file 'agents-view.fxml'.";
 
         colAgentId.setCellValueFactory(new PropertyValueFactory<Agent, Integer>("agentId"));
         colFName.setCellValueFactory(new PropertyValueFactory<Agent, String>("agtFirstName"));
@@ -115,11 +115,14 @@ public class AgentController {
     }
 
     private void openDialog(Agent t1, String mode) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("agentdialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("agentdialogue-view.fxml"));
         Parent parent = null;
-        try {
+        try
+        {
             parent = fxmlLoader.load();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
         AgentDialogueController dialogController = fxmlLoader.getController();
@@ -176,6 +179,7 @@ public class AgentController {
             public void handle(MouseEvent mouseEvent) {
                 mode = "add";
                 openDialog(null, mode);
+
             }
         });
 
