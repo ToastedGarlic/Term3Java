@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.BookingController">
+    <VBox spacing="10"> <!-- VBox for vertical stacking -->
+        <children>
+            <TableView fx:id="tvBookings" prefHeight="477.0" prefWidth="916.0">
+                <columns>
+                    <TableColumn fx:id="colBookingId" prefWidth="83.0" text="Booking ID" />
+                    <TableColumn fx:id="colBookingDate" prefWidth="130.0" text="Booking Date" />
+               <TableColumn fx:id="colBookingNo" prefWidth="137.0" text="Reference Code" />
+                    <TableColumn fx:id="colCustomer" prefWidth="187.0" text="Customer" />
+                    <TableColumn fx:id="colPackage" prefWidth="148.0" text="Package" />
+                    <TableColumn fx:id="colTravelerCount" minWidth="0.0" prefWidth="91.0" text="Traveler Count" />
+               <TableColumn fx:id="colTripType" minWidth="0.0" prefWidth="139.0" text="Trip Type" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefWidth="916.0" spacing="10"> <!-- HBox for horizontal alignment of buttons -->
+                <children>
+                    <Button onAction="#onAddBooking" text="Add Booking" />
+                    <Button onAction="#onModifyBooking" text="Modify Booking" />
+                    <Button onAction="#onDeleteBooking" text="Delete Booking" />
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+</AnchorPane>
