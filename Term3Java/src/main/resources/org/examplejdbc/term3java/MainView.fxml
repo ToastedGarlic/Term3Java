@@ -16,6 +16,9 @@
                 <Tab text="Packages" fx:id="tpPackages">
                     <!-- Content loaded by the controller -->
                 </Tab>
+                <Tab text="Bookings" fx:id="tpBookings">
+                    <!-- Content loaded by the controller -->
+                </Tab>
             </tabs>
         </TabPane>
     </center>
