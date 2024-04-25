@@ -2,6 +2,7 @@ package org.examplejdbc.term3java;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
