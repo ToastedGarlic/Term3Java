@@ -20,7 +20,6 @@
   <rowConstraints>
     <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="80.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="109.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="133.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="166.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
@@ -46,7 +45,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Middle Initial" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Label alignment="CENTER" text="Last Name" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <font>
             <Font size="20.0" />
          </font>
@@ -54,7 +53,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Last Name" GridPane.rowIndex="2">
+      <Label alignment="CENTER" text="Address" GridPane.rowIndex="2">
          <font>
             <Font size="20.0" />
          </font>
@@ -62,7 +61,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Address" GridPane.rowIndex="3">
+      <Label alignment="CENTER" text="City" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -70,7 +69,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="City" GridPane.rowIndex="4">
+      <Label alignment="CENTER" text="Province" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <font>
             <Font size="20.0" />
          </font>
@@ -78,7 +77,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Province" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <Label alignment="CENTER" text="Postal Code" GridPane.rowIndex="4">
          <font>
             <Font size="20.0" />
          </font>
@@ -86,7 +85,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Postal Code" GridPane.rowIndex="5">
+      <Label alignment="CENTER" text="Country" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <font>
             <Font size="20.0" />
          </font>
@@ -94,7 +93,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Country" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <Label alignment="CENTER" text="Home Phone" GridPane.rowIndex="5">
          <font>
             <Font size="20.0" />
          </font>
@@ -102,7 +101,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Home Phone" GridPane.rowIndex="6">
+      <Label alignment="CENTER" text="Business Phone" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <font>
             <Font size="20.0" />
          </font>
@@ -110,7 +109,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Business Phone" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <Label alignment="CENTER" text="Email" GridPane.rowIndex="6">
          <font>
             <Font size="20.0" />
          </font>
@@ -118,7 +117,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Email" GridPane.rowIndex="7">
+      <Label alignment="CENTER" text="Agent Id" GridPane.rowIndex="7">
          <font>
             <Font size="20.0" />
          </font>
@@ -126,15 +125,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label alignment="CENTER" text="Agent Id" GridPane.rowIndex="8">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
-         </GridPane.margin>
-      </Label>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="306.0" GridPane.columnIndex="3" GridPane.rowIndex="9">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="306.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
          <children>
             <Button fx:id="btnAddModify" alignment="CENTER" mnemonicParsing="false" text="AddModify">
                <HBox.margin>
@@ -159,57 +150,52 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustLastName" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="tfCustLastName" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustAddress" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3">
+      <TextField fx:id="tfCustAddress" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustCity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField fx:id="tfCustCity" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustProv" GridPane.columnIndex="3" GridPane.rowIndex="4">
+      <TextField fx:id="tfCustProv" GridPane.columnIndex="3" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustMiddleInitial" GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <TextField fx:id="tfCustPostal" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustPostal" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <TextField fx:id="tfCustCountry" GridPane.columnIndex="3" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustHomePhone" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <TextField fx:id="tfCustHomePhone" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustEmail" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7">
+      <TextField fx:id="tfCustBusPhone" GridPane.columnIndex="3" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfAgentId" GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <TextField fx:id="tfCustEmail" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="tfCustBusPhone" GridPane.columnIndex="3" GridPane.rowIndex="6">
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </GridPane.margin>
-      </TextField>
-      <TextField fx:id="tfCustCountry" GridPane.columnIndex="3" GridPane.rowIndex="5">
+      <TextField fx:id="tfAgentId" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>

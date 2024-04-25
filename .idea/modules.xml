@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Term3Java/Term3Java.iml" filepath="$PROJECT_DIR$/Term3Java/Term3Java.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/backup.iml" filepath="$PROJECT_DIR$/.idea/backup.iml" />
     </modules>
   </component>

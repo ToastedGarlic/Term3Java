@@ -7,16 +7,26 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class CustomerController {
 
@@ -76,6 +86,9 @@ public class CustomerController {
 
     private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
+    private String windowStatus = null;
+    private String mode;
+
     @FXML
     void initialize() {
         assert btnAddCustomer != null : "fx:id=\"btnAddCustomer\" was not injected: check your FXML file 'customersTab.fxml'.";
@@ -112,44 +125,127 @@ public class CustomerController {
         getCustomerInfo();
         tvCustomer.setItems(customerList);
 
-    }
+        /*tvCustomer.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Customer>() {
+            @Override
+            public void changed(ObservableValue<? extends Customer> observableValue, Customer customer, Customer t1) {
+                if (tvCustomer.getSelectionModel().isSelected((tvCustomer.getSelectionModel().getSelectedIndex())))
+                {
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            mode = "edit";
+                            openDialog(t1, mode);
+                        }
+                    });
+                }
+            }
+        });*/
 
+        btnAddCustomer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                windowStatus = "Add";
+                openDialog(null, windowStatus);
+            }
+        });
+
+        btnModifyCustomer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println(tvCustomer.getSelectionModel().getSelectedItem().getCustomerId());
+                mode = "edit";
+                openDialog(tvCustomer.getSelectionModel().getSelectedItem(), mode);
+            }
+        });
+
+        btnDeleteCustomer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                deleteCustomer();
+            }
+        });
+    }
+    // Method for getting customer data from mysql server and putting into list
     private void getCustomerInfo() {
-        Properties prop = new Properties();
+        customerList.clear();
         String url = "";
         String user = "";
         String password = "";
 
-        try (FileInputStream fis = new FileInputStream("d:\\connection.properties")) {
+        try {
+            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            Properties prop = new Properties();
             prop.load(fis);
-            url = prop.getProperty("url");
-            user = prop.getProperty("user");
-            password = prop.getProperty("password");
-
-            try (Connection conn = DriverManager.getConnection(url, user, password);
-                 Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT * FROM customers")) {
-
-                while (rs.next()) {
-                    Customer customer = new Customer(
-                            rs.getInt("CustomerId"),
-                            rs.getString("CustFirstName"),
-                            rs.getString("CustLastName"),
-                            rs.getString("CustAddress"),
-                            rs.getString("CustCity"),
-                            rs.getString("CustProv"),
-                            rs.getString("CustPostal"),
-                            rs.getString("CustCountry"),
-                            rs.getString("CustHomePhone"),
-                            rs.getString("CustBusPhone"),
-                            rs.getString("CustEmail"),
-                            rs.getInt("AgentId")
-                    );
-                    customerList.add(customer);
-                }
+            url = (String) prop.get("url");
+            user = (String) prop.get("user");
+            password = (String) prop.get("password");
+            Connection conn = DriverManager.getConnection(url, user, password);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from customers");
+            while (rs.next())
+            {
+                customerList.add(new Customer(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8),
+                        rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12)));
             }
+            conn.close();
         } catch (IOException | SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+
+    private void openDialog(Customer t1, String mode) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddModifyCustomer.fxml"));
+        Parent parent = null;
+        try {
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        AddModifyCustomerController addModifyCustomerController = fxmlLoader.getController();
+        addModifyCustomerController.passMode(mode);
+        if (mode.equals("edit"))
+        {
+            addModifyCustomerController.loadCustomer(t1);
+        }
+
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+        getCustomerInfo();
+    }
+
+    // method for delete operation of customer
+    private void deleteCustomer() {
+        String url = "";
+        String user = "";
+        String password = "";
+
+        Customer selectedCustomer = tvCustomer.getSelectionModel().getSelectedItem();
+
+        try {
+            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            Properties prop = new Properties();
+            prop.load(fis);
+            url = (String) prop.get("url");
+            user = (String) prop.get("user");
+            password = (String) prop.get("password");
+            Connection conn = DriverManager.getConnection(url, user, password);
+            String sql = "delete from customers where CustomerId=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, selectedCustomer.getCustomerId());
+
+            stmt.executeUpdate();
+            conn.close();
+        } catch (IOException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        getCustomerInfo();
+        tvCustomer.setItems(customerList);
+    }
+
 }
