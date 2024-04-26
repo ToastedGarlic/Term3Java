@@ -173,7 +173,9 @@ public class CustomerController {
         String user = "";
         String password = "";
 
-        try (FileInputStream fis = new FileInputStream("D:\\connection.properties")) {
+        try {
+            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            Properties prop = new Properties();
             prop.load(fis);
             url = (String) prop.get("url");
             user = (String) prop.get("user");
