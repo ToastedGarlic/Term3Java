@@ -4,6 +4,6 @@ module org.examplejdbc.term3java {
     requires java.sql;
 
 
-    opens org.examplejdbc.term3java to javafx.fxml;
-    exports org.examplejdbc.term3java;
+    opens org.example.jdbc.term3java to javafx.fxml;
+    exports org.example.jdbc.term3java;
 }

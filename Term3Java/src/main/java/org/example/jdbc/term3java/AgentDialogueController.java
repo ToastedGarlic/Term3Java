@@ -66,6 +66,8 @@ public class AgentDialogueController {
     private Label lblMode; // Value injected by FXMLLoader
 
     private String mode;
+    private AgentController parentController;
+    private Agent currentAgent;
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -218,4 +220,22 @@ public class AgentDialogueController {
             btnDelete.setVisible(false);
         }
     }
+    public void setMode(Agent editAgent) {
+        if (editAgent != null) {
+            this.currentAgent = editAgent;
+            tfAgtFirstName.setText(currentAgent.getAgtFirstName());
+            tfAgtMiddleInitial.setText(currentAgent.getAgtMiddleInitial());
+            tfAgtLastName.setText(currentAgent.getAgtLastName());
+            tfAgtBusPhone.setText(currentAgent.getAgtBusPhone());
+            tfAgtEmail.setText(currentAgent.getAgtEmail());
+            tfAgtPosition.setText(currentAgent.getAgtPosition());
+            tfAgencyId.setText(String.valueOf(currentAgent.getAgencyId()));
+        }
 }
+    public void setParentController(AgentController parent) {
+        this.parentController = parent;
+    }
+
+
+}
+

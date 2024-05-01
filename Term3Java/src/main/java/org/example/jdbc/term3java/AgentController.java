@@ -16,14 +16,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -74,6 +73,8 @@ public class AgentController {
     private Button btnDelAgent; // Value injected by FXMLLoader
 
     private ObservableList<Agent> data = FXCollections.observableArrayList();
+
+    private Properties prop = new Properties();
     private String mode;
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -151,6 +152,28 @@ public class AgentController {
 
 
     }
+private void showAddModifyAgentDialog(Agent editAgent) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("agentdialogue-view.fxml"));
+        Parent parent = loader.load();
+
+        AgentDialogueController agentDialogueController = loader.getController();
+        agentDialogueController.setParentController(this);
+        agentDialogueController.setMode(editAgent);
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle((editAgent == null) ? "Add Package" : "Modify Package");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(tvAgents.getScene().getWindow());
+        dialogStage.setScene(new Scene(parent));
+        dialogStage.showAndWait();
+
+        getAgents();
+    } catch (IOException e) {
+        e.printStackTrace();
+        showAlert("Error", "Cannot load the Add/Modify Agent window.");
+    }
+}
 
     private void getAgents() {
         data.clear();
@@ -181,21 +204,65 @@ public class AgentController {
                         rs.getInt(8)));
             }
             conn.close();
-        } catch (IOException | SQLException e) {
-            throw new RuntimeException(e);
         }
-        btnAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                mode = "add";
-                openDialog(null, mode);
+        catch (IOException | SQLException e)
+        {
+            throw new RuntimeException(e);
 
-            }
-        });
-
-
+        }
 
     }
+//      btnAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//        @Override
+//        public void handle(MouseEvent mouseEvent) {
+//            mode = "add";
+//            openDialog(null, mode);
+//
+//        }
+//    });
+    private void showAlert(String error, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
+        alert.setHeaderText(error);
+        alert.showAndWait();
+    }
+    @FXML
+    private void onModifyAgent(ActionEvent event) {
+        Agent selectedAgent = tvAgents.getSelectionModel().getSelectedItem();
+        if (selectedAgent != null) {
+            showAddModifyAgentDialog(selectedAgent);
+        } else {
+            showAlert("No Selection", "Please select an agent to modify.");
+        }
+    }
+    @FXML
+    private void onDeleteAgent(ActionEvent event) {
+        Agent selectedAgent = tvAgents.getSelectionModel().getSelectedItem();
+        if (selectedAgent != null && showConfirmation("Delete Agent", "Are you sure you want to delete this agent")) {
+            // Delete logic here
+            try (Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("password"));
+                 Statement stmt = conn.createStatement()) {
+                String sql = "DELETE FROM agents WHERE AgentId = " + selectedAgent.getAgentId();
+                int rows = stmt.executeUpdate(sql);
+                if (rows > 0) {
+                    data.remove(selectedAgent);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to delete the agent from the database.");
+            }
+        }
+    }
+    private boolean showConfirmation(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, content, ButtonType.YES, ButtonType.NO);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        return alert.showAndWait().orElse(ButtonType.NO) == ButtonType.YES;
+    }
+    @FXML
+    private void onAddAgent(ActionEvent event) {
+        showAddModifyAgentDialog(null);
+    }
+
 
 }
 
