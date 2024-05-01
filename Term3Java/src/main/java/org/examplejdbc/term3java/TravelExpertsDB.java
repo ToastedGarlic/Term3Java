@@ -1,4 +1,4 @@
-package org.examplejdbc.term3java;
+package org.example.jdbc.term3java;
 
 public class TravelExpertsDB {
 

@@ -1,4 +1,4 @@
-package org.examplejdbc.term3java;
+package org.example.jdbc.term3java;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.IOException;

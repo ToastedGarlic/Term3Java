@@ -1,4 +1,4 @@
-package org.examplejdbc.term3java;
+package org.example.jdbc.term3java;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;

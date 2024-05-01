@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.PackageController">
+<AnchorPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.jdbc.term3java.PackageController">
     <VBox spacing="10"> <!-- VBox for vertical stacking -->
         <children>
             <TableView fx:id="tvPackages" prefHeight="477.0" prefWidth="916.0">

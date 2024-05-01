@@ -2,7 +2,7 @@
  * Sample Skeleton for 'agents-view.fxml' Controller Class
  */
 
-package org.examplejdbc.term3java;
+package org.example.jdbc.term3java;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -67,6 +67,12 @@ public class AgentController {
     @FXML // fx:id="btnAdd"
     private Button btnAdd; // Value injected by FXMLLoader
 
+    @FXML // fx:id="btnModifyAgent"
+    private Button btnModifyAgent; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnDelAgent"
+    private Button btnDelAgent; // Value injected by FXMLLoader
+
     private ObservableList<Agent> data = FXCollections.observableArrayList();
     private String mode;
 
@@ -82,6 +88,9 @@ public class AgentController {
         assert colPosition != null : "fx:id=\"colPosition\" was not injected: check your FXML file 'agents-view.fxml'.";
         assert colAgencyId != null : "fx:id=\"colAgencyId\" was not injected: check your FXML file 'agents-view.fxml'.";
         assert btnAdd != null : "fx:id=\"btnAdd\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert btnModifyAgent != null : "fx:id=\"btnModifyAgent\" was not injected: check your FXML file 'agents-view.fxml'.";
+        assert btnDelAgent != null : "fx:id=\"btnDelAgent\" was not injected: check your FXML file 'agents-view.fxml'.";
+
 
         colAgentId.setCellValueFactory(new PropertyValueFactory<Agent, Integer>("agentId"));
         colFName.setCellValueFactory(new PropertyValueFactory<Agent, String>("agtFirstName"));
@@ -91,6 +100,7 @@ public class AgentController {
         colEmail.setCellValueFactory(new PropertyValueFactory<Agent, String>("agtEmail"));
         colPosition.setCellValueFactory(new PropertyValueFactory<Agent, String>("agtPosition"));
         colAgencyId.setCellValueFactory(new PropertyValueFactory<Agent, Integer>("agencyId"));
+
 
         tvAgents.setItems(data);
 
@@ -182,6 +192,7 @@ public class AgentController {
 
             }
         });
+
 
 
     }

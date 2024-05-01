@@ -1,4 +1,4 @@
-package org.examplejdbc.term3java;
+package org.example.jdbc.term3java;
 
 import java.io.FileInputStream;
 import java.io.IOException;
