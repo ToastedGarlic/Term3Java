@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.Objects;
 import java.util.Properties;
 
 public class BookingController {
@@ -65,13 +66,14 @@ public class BookingController {
                  ResultSet rs = stmt.executeQuery("SELECT b.BookingId, b.BookingDate, b.BookingNo, b.TravelerCount, c.CustFirstName, c.CustLastName, p.PkgName, t.TTName " +
                                                         "FROM `bookings` b LEFT JOIN customers c  ON c.CustomerId = b.CustomerId " +
                                                         "LEFT JOIN triptypes t ON t.TripTypeId = b.TripTypeId " +
-                                                        "LEFT JOIN packages p ON p.PackageId = b.PackageId")) {
-                bookingList.clear();
-                while (rs.next()) {
-                    String fullname = rs.getString("CustFirstName") + " " + rs.getString("CustLastName");
-                    Booking travelBooking = new Booking(rs.getInt("BookingId"), rs.getString("BookingDate").substring(0,10), rs.getString("BookingNo"),
-                                                        rs.getInt("TravelerCount"), fullname, rs.getString("PkgName"), rs.getString("TTName"));
-                    bookingList.add(travelBooking);
+                                                        "LEFT JOIN packages p ON p.PackageId = b.PackageId"))
+                {
+                    bookingList.clear();
+                    while (rs.next()) {
+                        String fullname = rs.getString("CustFirstName") + " " + rs.getString("CustLastName");
+                        Booking travelBooking = new Booking(rs.getInt("BookingId"), rs.getString("BookingDate").substring(0,10), rs.getString("BookingNo"),
+                                                            rs.getInt("TravelerCount"), fullname, rs.getString("PkgName"), rs.getString("TTName"));
+                        bookingList.add(travelBooking);
                 }
             }
         } catch (IOException | SQLException e) {
@@ -126,6 +128,7 @@ public class BookingController {
             AddModifyBookingController controller = loader.getController();
             controller.setParentController(this);
             controller.setMode(BookingToModify);
+            controller.getCustomerInfo();
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle((BookingToModify == null) ? "Add Booking" : "Modify Booking");
@@ -157,10 +160,81 @@ public class BookingController {
     }
 
     // Adds a new Booking to the database
-    public void addBooking(Booking newBooking) {
+    public void addBooking(Booking existingBooking, int custid, int packid, String tripid) {
+
+        try (Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("password"));
+             Statement stmt = conn.createStatement()) {
+            String sql = "INSERT INTO bookings (BookingDate, BookingNo, TravelerCount, CustomerId, PackageId, TripTypeId) VALUES( ";
+            sql += "'" + existingBooking.getBookingDate() + "',";
+            sql += "'" + existingBooking.getBookingNo() + "',";
+            sql += existingBooking.getTravelerCount() + ",";
+            if(custid == -1){
+                sql += "NULL,";
+            }
+            else {
+                sql += custid + ",";
+            }
+            if(packid == -1){
+                sql += "NULL,";
+            }
+            else {
+                sql += packid + ",";
+            }
+            if(Objects.equals(tripid, "NULL")){
+                sql += "NULL)";
+            }
+            else{
+                sql += "'"+tripid+"')";
+            }
+            int rows = stmt.executeUpdate(sql);
+            if (rows > 0) {
+                getBookingInfo();
+                showAlert("Success", "Booking successfully added to the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to delete the Booking from the database.");
+        }
+
     }
 
     // Updates an existing Booking in the database
-    public void updateBooking(Booking existingBooking) {
+    public void updateBooking(Booking existingBooking, int custid, int packid, String tripid) {
+
+        try (Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("password"));
+             Statement stmt = conn.createStatement()) {
+            String sql = "UPDATE bookings SET ";
+            sql += "BookingDate = '" + java.sql.Date.valueOf(existingBooking.getBookingDate()) + "', ";
+            sql += "BookingNo = '" + existingBooking.getBookingNo() + "', ";
+            if(custid == -1){
+                sql += "CustomerId = NULL, ";
+            }
+            else {
+                sql += "CustomerId = " + custid + ", ";
+            }
+            if(packid == -1){
+                sql += "PackageId = NULL, ";
+            }
+            else {
+                sql += "PackageId = " + packid + ",";
+            }
+            if(Objects.equals(tripid, "NULL")){
+                sql += "TripTypeId = NULL ";
+            }
+            else{
+                sql += "TripTypeId = '" + tripid + "' ";
+            }
+            sql += "WHERE BookingId = " + existingBooking.getBookingId();
+            System.out.println(sql);
+            int rows = stmt.executeUpdate(sql);
+            if (rows > 0) {
+                getBookingInfo();
+                showAlert("Success", "Booking " + existingBooking.getBookingId() + " successfully updated in the database.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to delete the Booking from the database.");
+        }
+
     }
 }

@@ -15,7 +15,8 @@ public class MainController {
     private Tab tpPackages;
     @FXML
     private Tab tpBookings;
-
+    @FXML
+    private Tab tpMessenger;
     @FXML
     private Tab tpAgents;
 
@@ -29,6 +30,7 @@ public class MainController {
         tpPackages.setContent(loadTabContent("PackagesTab.fxml"));
         tpBookings.setContent(loadTabContent("bookingsTab.fxml"));
         tpAgents.setContent(loadTabContent("agents-view.fxml"));
+        tpMessenger.setContent(loadTabContent("messengerTab.fxml"));
     }
 
     private AnchorPane loadTabContent(String fxmlFile) {
