@@ -46,6 +46,7 @@ public class Booking {
     public void setCustomer(String Customer) {this.Customer = new SimpleStringProperty(Customer);}
     public void setPackage(String Package) {this.Package = new SimpleStringProperty(Package);}
     public void setTripType(String TripType) {this.TripType = new SimpleStringProperty(TripType);}
-
+    public void setTravelerCount(int TravelerCount) {this.TravelerCount = new SimpleIntegerProperty(TravelerCount);
+    }
 
 }
