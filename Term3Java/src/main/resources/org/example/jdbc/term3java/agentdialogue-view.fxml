@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="368.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.AgentDialogueController">
+<AnchorPane prefHeight="368.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.jdbc.term3java.AgentDialogueController">
     <children>
-        <VBox layoutX="63.0" layoutY="39.0" prefHeight="250.0" prefWidth="89.0">
+        <VBox layoutX="63.0" layoutY="26.0" prefHeight="250.0" prefWidth="82.0">
             <children>
                 <Label text="Agent Id">
                     <VBox.margin>
@@ -79,7 +79,7 @@
                 </Label>
             </children>
         </VBox>
-        <VBox layoutX="169.0" layoutY="44.0" prefHeight="242.0" prefWidth="264.0">
+        <VBox layoutX="148.0" layoutY="26.0" prefHeight="250.0" prefWidth="262.0">
             <children>
                 <TextField fx:id="tfAgentId" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="197.0">
                     <VBox.margin>
@@ -123,20 +123,19 @@
                 </TextField>
             </children>
         </VBox>
-        <HBox alignment="CENTER" layoutX="64.0" layoutY="286.0" prefHeight="54.0" prefWidth="379.0">
+        <HBox alignment="CENTER" layoutX="35.0" layoutY="269.0" prefHeight="54.0" prefWidth="379.0">
             <children>
-                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0" prefWidth="52.0" text="Save" />
-                <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel">
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin></Button>
+                <Button fx:id="btnSave" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="Save" />
+                <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel" />
             </children>
         </HBox>
+        <Label layoutX="156.0" layoutY="333.0" text="Mode:" />
         <Label fx:id="lblMode" layoutX="312.0" layoutY="350.0" prefHeight="18.0" prefWidth="66.0" />
-      <Label layoutX="64.0" layoutY="10.0" prefHeight="25.0" prefWidth="213.0" text="Agent Information">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Label>
+      <Label fx:id="lblmode" layoutX="211.0" layoutY="333.0" prefHeight="17.0" prefWidth="50.0" />
     </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -62,12 +63,13 @@ public class AgentDialogueController {
     @FXML // fx:id="btnCancel"
     private Button btnCancel; // Value injected by FXMLLoader
 
-    @FXML // fx:id="lblMode"
-    private Label lblMode; // Value injected by FXMLLoader
 
-    private String mode;
+    private Agent existingAgent;
+    private AgentController parentController;
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
@@ -81,22 +83,7 @@ public class AgentDialogueController {
         assert btnSave != null : "fx:id=\"btnSave\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert btnDelete != null : "fx:id=\"btnDelete\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
-        assert lblMode != null : "fx:id=\"lblMode\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
 
-        tfAgentId.setDisable(true);
-        btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                btnSaveClicked(mouseEvent);
-            }
-        });
-
-        btnDelete.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                btnDeleteClicked(mouseEvent);
-            }
-        });
 
         btnCancel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -108,56 +95,38 @@ public class AgentDialogueController {
         });
     }
 
-    private void btnDeleteClicked(MouseEvent mouseEvent) {
-        Properties p = getProperties();
-        try {
-            Connection connection = DriverManager.getConnection(p.getProperty("url"), p);
-            String sql = "delete from agents where AgentId=?";
-
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, Integer.parseInt(tfAgentId.getText()));
-            int numRows = stmt.executeUpdate();
-            if (numRows==0) {
-                System.out.println("delete failed");
-            } else {
-                System.out.println("delete successful");
-            }
-            connection.close();
-            Node node = (Node) mouseEvent.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
-        } catch (SQLIntegrityConstraintViolationException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Delete failed");
-            alert.setContentText("Agent has customers and cannot be deleted");
-            alert.showAndWait();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public void setMode(Agent agentToModify) {
+        if (agentToModify != null) {
+            tfAgentId.setDisable(true);
+            this.existingAgent = agentToModify;
+            tfAgentId.setText(String.valueOf(existingAgent.getAgentId()));
+            tfAgtFirstName.setText(existingAgent.getAgtFirstName());
+            tfAgtMiddleInitial.setText(existingAgent.getAgtMiddleInitial());
+            tfAgtLastName.setText(existingAgent.getAgtLastName());
+            tfAgtBusPhone.setText(existingAgent.getAgtBusPhone());
+            tfAgtEmail.setText(existingAgent.getAgtEmail());
+            tfAgtPosition.setText(existingAgent.getAgtPosition());
+            tfAgencyId.setText(String.valueOf(existingAgent.getAgencyId()));
         }
     }
-
-
-
-    private void btnSaveClicked(MouseEvent mouseEvent) {
+    @FXML
+    private void onSave(ActionEvent event) {
         Properties p = getProperties();
         try {
             Connection connection = DriverManager.getConnection(p.getProperty("url"), p);
             String sql = "";
-            if (mode.equals("edit"))
-            {
+            if (existingAgent != null) {
                 //build update sql
                 sql = "UPDATE `agents` SET `AgtFirstName`=?," +
                         "`AgtMiddleInitial`=?,`AgtLastName`=?,`AgtBusPhone`=?," +
                         "`AgtEmail`=?,`AgtPosition`=?,`AgencyId`=? WHERE AgentId=?";
-            }
-            else
-            {
+            } else {
                 //build insert sql
                 sql = "INSERT INTO `agents`(`AgtFirstName`, `AgtMiddleInitial`, " +
                         "`AgtLastName`, `AgtBusPhone`, `AgtEmail`, `AgtPosition`," +
                         " `AgencyId`) VALUES (?,?,?,?,?,?,?)";
             }
-             //updating the database with the agent info
+            //updating the database with the agent info
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, tfAgtFirstName.getText());
             stmt.setString(2, tfAgtMiddleInitial.getText());
@@ -166,36 +135,25 @@ public class AgentDialogueController {
             stmt.setString(5, tfAgtEmail.getText());
             stmt.setString(6, tfAgtPosition.getText());
             stmt.setInt(7, Integer.parseInt(tfAgencyId.getText()));
-            if (mode.equals("edit"))
-            {
+            if (existingAgent != null) {
                 stmt.setInt(8, Integer.parseInt(tfAgentId.getText()));
             }
             int numRows = stmt.executeUpdate();
-            if (numRows==0) {
+            if (numRows == 0) {
                 System.out.println("update failed");
             } else {
                 System.out.println("update successful");
             }
             connection.close();
-            Node node = (Node) mouseEvent.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.close();
+            closeStage(event);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-
-    public void processAgent(Agent t1) {
-
-        tfAgentId.setText(t1.getAgentId() + "");
-        tfAgtFirstName.setText(t1.getAgtFirstName());
-        tfAgtMiddleInitial.setText(t1.getAgtMiddleInitial());
-        tfAgtLastName.setText(t1.getAgtLastName());
-        tfAgtBusPhone.setText(t1.getAgtBusPhone());
-        tfAgtEmail.setText(t1.getAgtEmail());
-        tfAgtPosition.setText(t1.getAgtPosition());
-        tfAgencyId.setText(t1.getAgencyId() + "");
+    private void closeStage(ActionEvent event) {
+        Stage stage = (Stage) tfAgentId.getScene().getWindow();
+        stage.close();
     }
 
     private Properties getProperties() {
@@ -209,13 +167,8 @@ public class AgentDialogueController {
         }
     }
 
-    public void passMode(String mode) {
-        this.mode = mode;
-        lblmode.setText(mode);
 
-        if (mode.equals("add"))
-        {
-            btnDelete.setVisible(false);
-        }
+    public void setParentController(AgentController parent) {
+        this.parentController = parent;
     }
 }

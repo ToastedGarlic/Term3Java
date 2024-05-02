@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:controller="org.example.jdbc.term3java.AddModifyPackageController"
+          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+          alignment="CENTER" hgap="10" vgap="10" style="-fx-background-color: white;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <!-- Titles for the form -->
+    <Text text="Package Information" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+        <font>
+            <Font size="18" />
+        </font>
+    </Text>
+
+    <!-- Labels and TextFields for package information -->
+    <Label text="Package Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <TextField fx:id="txtPkgName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+    <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <TextField fx:id="txtPkgStartDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+    <Label text="End Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <TextField fx:id="txtPkgEndDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+    <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <TextField fx:id="txtPkgDesc" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+    <Label text="Base Price:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <TextField fx:id="txtPkgBasePrice" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+    <Label text="Agency Commission:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <TextField fx:id="txtPkgAgencyCommission" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+    <!-- Buttons for Save and Cancel -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="7">
+        <Button text="Save" onAction="#onSave" />
+        <Button text="Cancel" onAction="#closeStage" />
+    </HBox>
+
+</GridPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.jdbc.term3java.CustomerController">
+    <TableView fx:id="tvCustomer" prefHeight="477.0" prefWidth="916.0">
+        <columns>
+            <TableColumn fx:id="colCustomerId" prefWidth="75.0" text="Customer Id" />
+            <TableColumn fx:id="colCustFirstName" prefWidth="100.0" text="First Name" />
+            <TableColumn fx:id="colCustLastName" prefWidth="100.0" text="Last Name" />
+            <TableColumn fx:id="colCustAddress" prefWidth="150.0" text="Address" />
+            <TableColumn fx:id="colCustCity" prefWidth="100.0" text="City" />
+            <TableColumn fx:id="colCustProv" prefWidth="100.0" text="Province" />
+            <TableColumn fx:id="colCustPostal" prefWidth="100.0" text="Postal Code" />
+            <TableColumn fx:id="colCustCountry" prefWidth="100.0" text="Country" />
+            <TableColumn fx:id="colCustHomePhone" prefWidth="100.0" text="Home Phone" />
+            <TableColumn fx:id="colCustBusPhone" prefWidth="100.0" text="Business Phone" />
+            <TableColumn fx:id="colCustEmail" prefWidth="150.0" text="Email" />
+            <TableColumn fx:id="colAgentId" prefWidth="75.0" text="Agent Id" />
+        </columns>
+    </TableView>
+</AnchorPane>
