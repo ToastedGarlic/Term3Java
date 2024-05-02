@@ -164,7 +164,7 @@ public class BookingController {
 
         try (Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("password"));
              Statement stmt = conn.createStatement()) {
-            String sql = "INSERT INTO Bookings (BookingDate, BookingNo, TravelerCount, CustomerId, PackageId, TripTypeId) VALUES( ";
+            String sql = "INSERT INTO bookings (BookingDate, BookingNo, TravelerCount, CustomerId, PackageId, TripTypeId) VALUES( ";
             sql += "'" + existingBooking.getBookingDate() + "',";
             sql += "'" + existingBooking.getBookingNo() + "',";
             sql += existingBooking.getTravelerCount() + ",";
@@ -181,10 +181,10 @@ public class BookingController {
                 sql += packid + ",";
             }
             if(Objects.equals(tripid, "NULL")){
-                sql += "NULL";
+                sql += "NULL)";
             }
             else{
-                sql += "'"+tripid+"'";
+                sql += "'"+tripid+"')";
             }
             int rows = stmt.executeUpdate(sql);
             if (rows > 0) {
@@ -203,7 +203,7 @@ public class BookingController {
 
         try (Connection conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("user"), prop.getProperty("password"));
              Statement stmt = conn.createStatement()) {
-            String sql = "UPDATE Bookings SET ";
+            String sql = "UPDATE bookings SET ";
             sql += "BookingDate = '" + java.sql.Date.valueOf(existingBooking.getBookingDate()) + "', ";
             sql += "BookingNo = '" + existingBooking.getBookingNo() + "', ";
             if(custid == -1){
