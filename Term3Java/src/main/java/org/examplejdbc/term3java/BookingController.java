@@ -112,10 +112,16 @@ public class BookingController {
                 if (rows > 0) {
                     bookingList.remove(selectedBooking);
                 }
-            } catch (SQLException e) {
+
+            }catch (SQLIntegrityConstraintViolationException e){
+                e.printStackTrace();
+                showAlert("Error", "Cannot delete a booking referenced in a BookingDetails entry");
+            }
+            catch (SQLException e) {
                 e.printStackTrace();
                 showAlert("Error", "Failed to delete the Booking from the database.");
             }
+
         }
     }
 

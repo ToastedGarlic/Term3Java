@@ -117,7 +117,7 @@ public class AddModifyBookingDetailsController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Error", "Cannot load Booking Details information.");
+            showError("Error", "Cannot load Booking Details information.");
         }
     }
 
@@ -427,7 +427,7 @@ public class AddModifyBookingDetailsController {
 
         // Display the error message if one exists, then return the validity state of the data
         if(!errorMessage.equals("")){
-            showAlert(mode+" Error",errorMessage);
+            showError(mode+" Error",errorMessage);
         }
         return isValid;
     }
@@ -477,7 +477,7 @@ public class AddModifyBookingDetailsController {
                 showAlert("Insert Complete!","New entry successfully inserted");
             }
             else{
-                showAlert("Update Failed!","New entry failed to insert");            }
+                showError("Update Failed!","New entry failed to insert");            }
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -518,7 +518,7 @@ public class AddModifyBookingDetailsController {
                 showAlert("Update Complete!","Changes successfully saved");
             }
             else{
-                showAlert("Update Failed!","Changes failed to save");            }
+                showError("Update Failed!","Changes failed to save");            }
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -532,8 +532,14 @@ public class AddModifyBookingDetailsController {
         stage.close();
     }
 
-    // Display an error message with provided header and content
+    // Display an message with provided header and content
     private void showAlert(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.NONE, content, ButtonType.OK);
+        alert.setHeaderText(header);
+        alert.showAndWait();
+    }
+    // Display an error message with provided header and content
+    private void showError(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
         alert.setHeaderText(header);
         alert.showAndWait();
