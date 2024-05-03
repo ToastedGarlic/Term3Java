@@ -18,6 +18,7 @@ import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -54,7 +55,8 @@ public class PackageController {
 
     private void getPackageInfo() {
         // Load connection properties
-        try (FileInputStream fis = new FileInputStream("c:\\connection.properties")) {
+
+        try (InputStream fis = getClass().getResourceAsStream("/config/connection.properties")) {
             prop.load(fis);
             String url = prop.getProperty("url");
             String user = prop.getProperty("user");
