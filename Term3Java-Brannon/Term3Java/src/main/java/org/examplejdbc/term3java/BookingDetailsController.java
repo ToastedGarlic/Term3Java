@@ -142,7 +142,7 @@ public class BookingDetailsController {
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace();
-            showError("Error", "Cannot load Booking Details information.");
+            showAlert("Error", "Cannot load Booking Details information.");
         }
     }
 
@@ -159,7 +159,7 @@ public class BookingDetailsController {
         if (selectedDetails != null) {
            showAddModifyDialog(selectedDetails,"Edit");
         } else {
-            showError("No Selection", "Please select Booking Details to modify.");
+            showAlert("No Selection", "Please select Booking Details to modify.");
         }
     }
 
@@ -183,11 +183,11 @@ public class BookingDetailsController {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                showError("Deletion Error", "Failed to delete entry");
+                showAlert("Deletion Error", "Failed to delete entry");
             }
         }
         else{ // User did not select an entry
-            showError("Deletion Error", "You must select an entry to delete");
+            showAlert("Deletion Error", "You must select an entry to delete");
         }
     }
 
@@ -212,19 +212,13 @@ public class BookingDetailsController {
             getBookingDetails();
         } catch (IOException e) {
             e.printStackTrace();
-            showError("Error", "Cannot load the Add/Modify Booking Details window.");
+            showAlert("Error", "Cannot load the Add/Modify Booking Details window.");
         }
     }
 
     // Displays an error message
-    private void showError(String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
-        alert.setHeaderText(header);
-        alert.showAndWait();
-    }
-    // Displays a regular message
     private void showAlert(String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.NONE, content, ButtonType.OK);
+        Alert alert = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
         alert.setHeaderText(header);
         alert.showAndWait();
     }
