@@ -30,7 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class CustomerController {
-
+    private Properties prop = new Properties();
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 

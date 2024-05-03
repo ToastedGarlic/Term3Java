@@ -111,7 +111,7 @@ public class TravelExpertsController {
         String password = "";
 
         try {
-            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            FileInputStream fis = new FileInputStream("C:\\connection.properties");
             Properties prop = new Properties();
             prop.load(fis);
             url = (String) prop.get("url");
