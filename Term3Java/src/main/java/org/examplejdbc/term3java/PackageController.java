@@ -55,7 +55,7 @@ public class PackageController {
 
     private void getPackageInfo() {
         // Load connection properties
-        try (FileInputStream fis = new FileInputStream("D:\\connection.properties")) {
+        try (FileInputStream fis = new FileInputStream("C:\\connection.properties")) {
             prop.load(fis);
             String url = prop.getProperty("url");
             String user = prop.getProperty("user");
