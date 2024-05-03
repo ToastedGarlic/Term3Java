@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2024 at 04:44 PM
+-- Generation Time: May 03, 2024 at 05:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `travelexperts`
 --
+DROP DATABASE IF EXISTS `travelexperts`;
+CREATE DATABASE IF NOT EXISTS `travelexperts` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `travelexperts`;
 
 -- --------------------------------------------------------
 
@@ -27,10 +30,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `affiliations`
 --
 
-CREATE TABLE `affiliations` (
+DROP TABLE IF EXISTS `affiliations`;
+CREATE TABLE IF NOT EXISTS `affiliations` (
   `AffilitationId` varchar(10) NOT NULL,
   `AffName` varchar(50) DEFAULT NULL,
-  `AffDesc` varchar(50) DEFAULT NULL
+  `AffDesc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`AffilitationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -52,16 +57,18 @@ INSERT INTO `affiliations` (`AffilitationId`, `AffName`, `AffDesc`) VALUES
 -- Table structure for table `agencies`
 --
 
-CREATE TABLE `agencies` (
-  `AgencyId` int(11) NOT NULL,
+DROP TABLE IF EXISTS `agencies`;
+CREATE TABLE IF NOT EXISTS `agencies` (
+  `AgencyId` int(11) NOT NULL AUTO_INCREMENT,
   `AgncyAddress` varchar(50) DEFAULT NULL,
   `AgncyCity` varchar(50) DEFAULT NULL,
   `AgncyProv` varchar(50) DEFAULT NULL,
   `AgncyPostal` varchar(50) DEFAULT NULL,
   `AgncyCountry` varchar(50) DEFAULT NULL,
   `AgncyPhone` varchar(50) DEFAULT NULL,
-  `AgncyFax` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `AgncyFax` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`AgencyId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `agencies`
@@ -77,16 +84,19 @@ INSERT INTO `agencies` (`AgencyId`, `AgncyAddress`, `AgncyCity`, `AgncyProv`, `A
 -- Table structure for table `agents`
 --
 
-CREATE TABLE `agents` (
-  `AgentId` int(11) NOT NULL,
+DROP TABLE IF EXISTS `agents`;
+CREATE TABLE IF NOT EXISTS `agents` (
+  `AgentId` int(11) NOT NULL AUTO_INCREMENT,
   `AgtFirstName` varchar(20) DEFAULT NULL,
   `AgtMiddleInitial` varchar(5) DEFAULT NULL,
   `AgtLastName` varchar(20) DEFAULT NULL,
   `AgtBusPhone` varchar(20) DEFAULT NULL,
   `AgtEmail` varchar(50) DEFAULT NULL,
   `AgtPosition` varchar(20) DEFAULT NULL,
-  `AgencyId` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=COMPACT;
+  `AgencyId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`AgentId`),
+  KEY `AgencyId` (`AgencyId`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `agents`
@@ -109,7 +119,8 @@ INSERT INTO `agents` (`AgentId`, `AgtFirstName`, `AgtMiddleInitial`, `AgtLastNam
 -- Table structure for table `bookingdetails`
 --
 
-CREATE TABLE `bookingdetails` (
+DROP TABLE IF EXISTS `bookingdetails`;
+CREATE TABLE IF NOT EXISTS `bookingdetails` (
   `BookingDetailId` int(11) NOT NULL,
   `ItineraryNo` double DEFAULT NULL,
   `TripStart` datetime DEFAULT NULL,
@@ -281,7 +292,8 @@ INSERT INTO `bookingdetails` (`BookingDetailId`, `ItineraryNo`, `TripStart`, `Tr
 -- Table structure for table `bookings`
 --
 
-CREATE TABLE `bookings` (
+DROP TABLE IF EXISTS `bookings`;
+CREATE TABLE IF NOT EXISTS `bookings` (
   `BookingId` int(11) NOT NULL,
   `BookingDate` datetime DEFAULT NULL,
   `BookingNo` varchar(50) DEFAULT NULL,
@@ -438,7 +450,8 @@ INSERT INTO `bookings` (`BookingId`, `BookingDate`, `BookingNo`, `TravelerCount`
 -- Table structure for table `classes`
 --
 
-CREATE TABLE `classes` (
+DROP TABLE IF EXISTS `classes`;
+CREATE TABLE IF NOT EXISTS `classes` (
   `ClassId` varchar(5) NOT NULL,
   `ClassName` varchar(20) NOT NULL,
   `ClassDesc` varchar(50) DEFAULT NULL
@@ -465,7 +478,8 @@ INSERT INTO `classes` (`ClassId`, `ClassName`, `ClassDesc`) VALUES
 -- Table structure for table `creditcards`
 --
 
-CREATE TABLE `creditcards` (
+DROP TABLE IF EXISTS `creditcards`;
+CREATE TABLE IF NOT EXISTS `creditcards` (
   `CreditCardId` int(11) NOT NULL,
   `CCName` varchar(10) NOT NULL,
   `CCNumber` varchar(50) NOT NULL,
@@ -508,8 +522,9 @@ INSERT INTO `creditcards` (`CreditCardId`, `CCName`, `CCNumber`, `CCExpiry`, `Cu
 -- Table structure for table `customers`
 --
 
-CREATE TABLE `customers` (
-  `CustomerId` int(11) NOT NULL,
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE IF NOT EXISTS `customers` (
+  `CustomerId` int(11) NOT NULL AUTO_INCREMENT,
   `CustFirstName` varchar(25) NOT NULL,
   `CustLastName` varchar(25) NOT NULL,
   `CustAddress` varchar(75) NOT NULL,
@@ -522,8 +537,10 @@ CREATE TABLE `customers` (
   `CustEmail` varchar(50) NOT NULL,
   `AgentId` int(11) DEFAULT NULL,
   `Username` varchar(30) DEFAULT NULL,
-  `Password` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `Password` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`CustomerId`),
+  KEY `EmployeesCustomers` (`AgentId`)
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `customers`
@@ -563,7 +580,8 @@ INSERT INTO `customers` (`CustomerId`, `CustFirstName`, `CustLastName`, `CustAdd
 -- Table structure for table `customers_rewards`
 --
 
-CREATE TABLE `customers_rewards` (
+DROP TABLE IF EXISTS `customers_rewards`;
+CREATE TABLE IF NOT EXISTS `customers_rewards` (
   `CustomerId` int(11) NOT NULL,
   `RewardId` int(11) NOT NULL,
   `RwdNumber` varchar(25) NOT NULL
@@ -601,7 +619,8 @@ INSERT INTO `customers_rewards` (`CustomerId`, `RewardId`, `RwdNumber`) VALUES
 -- Table structure for table `fees`
 --
 
-CREATE TABLE `fees` (
+DROP TABLE IF EXISTS `fees`;
+CREATE TABLE IF NOT EXISTS `fees` (
   `FeeId` varchar(10) NOT NULL,
   `FeeName` varchar(50) NOT NULL,
   `FeeAmt` decimal(19,4) NOT NULL,
@@ -627,7 +646,8 @@ INSERT INTO `fees` (`FeeId`, `FeeName`, `FeeAmt`, `FeeDesc`) VALUES
 -- Table structure for table `messages`
 --
 
-CREATE TABLE `messages` (
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
   `MessageId` int(11) NOT NULL,
   `MsgDate` datetime DEFAULT current_timestamp(),
   `MsgContent` varchar(50) DEFAULT NULL,
@@ -653,15 +673,17 @@ INSERT INTO `messages` (`MessageId`, `MsgDate`, `MsgContent`, `AgentId`, `Custom
 -- Table structure for table `packages`
 --
 
-CREATE TABLE `packages` (
-  `PackageId` int(11) NOT NULL,
+DROP TABLE IF EXISTS `packages`;
+CREATE TABLE IF NOT EXISTS `packages` (
+  `PackageId` int(11) NOT NULL AUTO_INCREMENT,
   `PkgName` varchar(50) NOT NULL,
   `PkgStartDate` datetime DEFAULT NULL,
   `PkgEndDate` datetime DEFAULT NULL,
   `PkgDesc` varchar(50) DEFAULT NULL,
   `PkgBasePrice` decimal(19,4) NOT NULL,
-  `PkgAgencyCommission` decimal(19,4) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `PkgAgencyCommission` decimal(19,4) DEFAULT NULL,
+  PRIMARY KEY (`PackageId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `packages`
@@ -679,7 +701,8 @@ INSERT INTO `packages` (`PackageId`, `PkgName`, `PkgStartDate`, `PkgEndDate`, `P
 -- Table structure for table `packages_products_suppliers`
 --
 
-CREATE TABLE `packages_products_suppliers` (
+DROP TABLE IF EXISTS `packages_products_suppliers`;
+CREATE TABLE IF NOT EXISTS `packages_products_suppliers` (
   `PackageId` int(11) NOT NULL,
   `ProductSupplierId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -707,10 +730,13 @@ INSERT INTO `packages_products_suppliers` (`PackageId`, `ProductSupplierId`) VAL
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
-  `ProductId` int(11) NOT NULL,
-  `ProdName` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `ProductId` int(11) NOT NULL AUTO_INCREMENT,
+  `ProdName` varchar(50) NOT NULL,
+  PRIMARY KEY (`ProductId`),
+  KEY `ProductId` (`ProductId`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `products`
@@ -737,11 +763,18 @@ INSERT INTO `products` (`ProductId`, `ProdName`) VALUES
 -- Table structure for table `products_suppliers`
 --
 
-CREATE TABLE `products_suppliers` (
-  `ProductSupplierId` int(11) NOT NULL,
+DROP TABLE IF EXISTS `products_suppliers`;
+CREATE TABLE IF NOT EXISTS `products_suppliers` (
+  `ProductSupplierId` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) DEFAULT NULL,
-  `SupplierId` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `SupplierId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ProductSupplierId`),
+  KEY `Product_Supplier_ID` (`SupplierId`),
+  KEY `ProductId` (`ProductId`),
+  KEY `ProductsProducts_Suppliers1` (`ProductId`),
+  KEY `ProductSupplierId` (`ProductSupplierId`),
+  KEY `SuppliersProducts_Suppliers1` (`SupplierId`)
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `products_suppliers`
@@ -833,10 +866,12 @@ INSERT INTO `products_suppliers` (`ProductSupplierId`, `ProductId`, `SupplierId`
 -- Table structure for table `provincesstates`
 --
 
-CREATE TABLE `provincesstates` (
+DROP TABLE IF EXISTS `provincesstates`;
+CREATE TABLE IF NOT EXISTS `provincesstates` (
   `ProvCode` varchar(2) NOT NULL,
   `Name` varchar(30) NOT NULL,
-  `CountryCode` varchar(2) NOT NULL
+  `CountryCode` varchar(2) NOT NULL,
+  PRIMARY KEY (`ProvCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -907,9 +942,11 @@ INSERT INTO `provincesstates` (`ProvCode`, `Name`, `CountryCode`) VALUES
 -- Table structure for table `regions`
 --
 
-CREATE TABLE `regions` (
+DROP TABLE IF EXISTS `regions`;
+CREATE TABLE IF NOT EXISTS `regions` (
   `RegionId` varchar(5) NOT NULL,
-  `RegionName` varchar(25) DEFAULT NULL
+  `RegionName` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`RegionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -934,10 +971,12 @@ INSERT INTO `regions` (`RegionId`, `RegionName`) VALUES
 -- Table structure for table `rewards`
 --
 
-CREATE TABLE `rewards` (
+DROP TABLE IF EXISTS `rewards`;
+CREATE TABLE IF NOT EXISTS `rewards` (
   `RewardId` int(11) NOT NULL,
   `RwdName` varchar(50) DEFAULT NULL,
-  `RwdDesc` varchar(50) DEFAULT NULL
+  `RwdDesc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`RewardId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -957,7 +996,8 @@ INSERT INTO `rewards` (`RewardId`, `RwdName`, `RwdDesc`) VALUES
 -- Table structure for table `suppliercontacts`
 --
 
-CREATE TABLE `suppliercontacts` (
+DROP TABLE IF EXISTS `suppliercontacts`;
+CREATE TABLE IF NOT EXISTS `suppliercontacts` (
   `SupplierContactId` int(11) NOT NULL,
   `SupConFirstName` varchar(50) DEFAULT NULL,
   `SupConLastName` varchar(50) DEFAULT NULL,
@@ -972,7 +1012,10 @@ CREATE TABLE `suppliercontacts` (
   `SupConEmail` text DEFAULT NULL,
   `SupConURL` text DEFAULT NULL,
   `AffiliationId` varchar(10) DEFAULT NULL,
-  `SupplierId` int(11) DEFAULT NULL
+  `SupplierId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`SupplierContactId`),
+  KEY `AffiliationsSupCon` (`AffiliationId`),
+  KEY `SuppliersSupCon` (`SupplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -1329,9 +1372,12 @@ INSERT INTO `suppliercontacts` (`SupplierContactId`, `SupConFirstName`, `SupConL
 -- Table structure for table `suppliers`
 --
 
-CREATE TABLE `suppliers` (
+DROP TABLE IF EXISTS `suppliers`;
+CREATE TABLE IF NOT EXISTS `suppliers` (
   `SupplierId` int(11) NOT NULL,
-  `SupName` text DEFAULT NULL
+  `SupName` text DEFAULT NULL,
+  PRIMARY KEY (`SupplierId`),
+  KEY `SupplierId` (`SupplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -1420,9 +1466,11 @@ INSERT INTO `suppliers` (`SupplierId`, `SupName`) VALUES
 -- Table structure for table `triptypes`
 --
 
-CREATE TABLE `triptypes` (
+DROP TABLE IF EXISTS `triptypes`;
+CREATE TABLE IF NOT EXISTS `triptypes` (
   `TripTypeId` varchar(1) NOT NULL,
-  `TTName` varchar(25) DEFAULT NULL
+  `TTName` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`TripTypeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -1435,231 +1483,6 @@ INSERT INTO `triptypes` (`TripTypeId`, `TTName`) VALUES
 ('L', 'Leisure                  ');
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `affiliations`
---
-ALTER TABLE `affiliations`
-  ADD PRIMARY KEY (`AffilitationId`);
-
---
--- Indexes for table `agencies`
---
-ALTER TABLE `agencies`
-  ADD PRIMARY KEY (`AgencyId`);
-
---
--- Indexes for table `agents`
---
-ALTER TABLE `agents`
-  ADD PRIMARY KEY (`AgentId`),
-  ADD KEY `AgencyId` (`AgencyId`);
-
---
--- Indexes for table `bookingdetails`
---
-ALTER TABLE `bookingdetails`
-  ADD PRIMARY KEY (`BookingDetailId`),
-  ADD KEY `Agency_Fee_Code` (`FeeId`),
-  ADD KEY `BookingId` (`BookingId`),
-  ADD KEY `BookingsBookingDetails` (`BookingId`),
-  ADD KEY `ClassesBookingDetails` (`ClassId`),
-  ADD KEY `Dest_ID` (`RegionId`),
-  ADD KEY `DestinationsBookingDetails` (`RegionId`),
-  ADD KEY `FeesBookingDetails` (`FeeId`),
-  ADD KEY `Products_SuppliersBookingDetails` (`ProductSupplierId`),
-  ADD KEY `ProductSupplierId` (`ProductSupplierId`);
-
---
--- Indexes for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`BookingId`),
-  ADD KEY `BookingsCustomerId` (`CustomerId`),
-  ADD KEY `CustomersBookings` (`CustomerId`),
-  ADD KEY `PackageId` (`PackageId`),
-  ADD KEY `PackagesBookings` (`PackageId`),
-  ADD KEY `TripTypesBookings` (`TripTypeId`);
-
---
--- Indexes for table `classes`
---
-ALTER TABLE `classes`
-  ADD PRIMARY KEY (`ClassId`);
-
---
--- Indexes for table `creditcards`
---
-ALTER TABLE `creditcards`
-  ADD PRIMARY KEY (`CreditCardId`),
-  ADD KEY `CustomersCreditCards` (`CustomerId`);
-
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`CustomerId`),
-  ADD KEY `EmployeesCustomers` (`AgentId`);
-
---
--- Indexes for table `customers_rewards`
---
-ALTER TABLE `customers_rewards`
-  ADD PRIMARY KEY (`CustomerId`,`RewardId`),
-  ADD KEY `CustomersCustomers_Rewards` (`CustomerId`),
-  ADD KEY `RewardsCustomers_Rewards` (`RewardId`);
-
---
--- Indexes for table `fees`
---
-ALTER TABLE `fees`
-  ADD PRIMARY KEY (`FeeId`);
-
---
--- Indexes for table `messages`
---
-ALTER TABLE `messages`
-  ADD PRIMARY KEY (`MessageId`);
-
---
--- Indexes for table `packages`
---
-ALTER TABLE `packages`
-  ADD PRIMARY KEY (`PackageId`);
-
---
--- Indexes for table `packages_products_suppliers`
---
-ALTER TABLE `packages_products_suppliers`
-  ADD PRIMARY KEY (`PackageId`,`ProductSupplierId`),
-  ADD KEY `PackagesPackages_Products_Suppliers` (`PackageId`),
-  ADD KEY `Products_SuppliersPackages_Products_Suppliers` (`ProductSupplierId`),
-  ADD KEY `ProductSupplierId` (`ProductSupplierId`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`ProductId`),
-  ADD KEY `ProductId` (`ProductId`);
-
---
--- Indexes for table `products_suppliers`
---
-ALTER TABLE `products_suppliers`
-  ADD PRIMARY KEY (`ProductSupplierId`),
-  ADD KEY `Product_Supplier_ID` (`SupplierId`),
-  ADD KEY `ProductId` (`ProductId`),
-  ADD KEY `ProductsProducts_Suppliers1` (`ProductId`),
-  ADD KEY `ProductSupplierId` (`ProductSupplierId`),
-  ADD KEY `SuppliersProducts_Suppliers1` (`SupplierId`);
-
---
--- Indexes for table `provincesstates`
---
-ALTER TABLE `provincesstates`
-  ADD PRIMARY KEY (`ProvCode`);
-
---
--- Indexes for table `regions`
---
-ALTER TABLE `regions`
-  ADD PRIMARY KEY (`RegionId`);
-
---
--- Indexes for table `rewards`
---
-ALTER TABLE `rewards`
-  ADD PRIMARY KEY (`RewardId`);
-
---
--- Indexes for table `suppliercontacts`
---
-ALTER TABLE `suppliercontacts`
-  ADD PRIMARY KEY (`SupplierContactId`),
-  ADD KEY `AffiliationsSupCon` (`AffiliationId`),
-  ADD KEY `SuppliersSupCon` (`SupplierId`);
-
---
--- Indexes for table `suppliers`
---
-ALTER TABLE `suppliers`
-  ADD PRIMARY KEY (`SupplierId`),
-  ADD KEY `SupplierId` (`SupplierId`);
-
---
--- Indexes for table `triptypes`
---
-ALTER TABLE `triptypes`
-  ADD PRIMARY KEY (`TripTypeId`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `agencies`
---
-ALTER TABLE `agencies`
-  MODIFY `AgencyId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `agents`
---
-ALTER TABLE `agents`
-  MODIFY `AgentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `bookingdetails`
---
-ALTER TABLE `bookingdetails`
-  MODIFY `BookingDetailId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1304;
-
---
--- AUTO_INCREMENT for table `bookings`
---
-ALTER TABLE `bookings`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1304;
-
---
--- AUTO_INCREMENT for table `creditcards`
---
-ALTER TABLE `creditcards`
-  MODIFY `CreditCardId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
-
---
--- AUTO_INCREMENT for table `customers`
---
-ALTER TABLE `customers`
-  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
-
---
--- AUTO_INCREMENT for table `messages`
---
-ALTER TABLE `messages`
-  MODIFY `MessageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `packages`
---
-ALTER TABLE `packages`
-  MODIFY `PackageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `ProductId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `products_suppliers`
---
-ALTER TABLE `products_suppliers`
-  MODIFY `ProductSupplierId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
-
---
 -- Constraints for dumped tables
 --
 
@@ -1670,47 +1493,10 @@ ALTER TABLE `agents`
   ADD CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`AgencyId`) REFERENCES `agencies` (`AgencyId`);
 
 --
--- Constraints for table `bookingdetails`
---
-ALTER TABLE `bookingdetails`
-  ADD CONSTRAINT `bookingdetails_ibfk_1` FOREIGN KEY (`BookingId`) REFERENCES `bookings` (`BookingId`),
-  ADD CONSTRAINT `bookingdetails_ibfk_2` FOREIGN KEY (`RegionId`) REFERENCES `regions` (`RegionId`),
-  ADD CONSTRAINT `bookingdetails_ibfk_3` FOREIGN KEY (`ClassId`) REFERENCES `classes` (`ClassId`),
-  ADD CONSTRAINT `bookingdetails_ibfk_4` FOREIGN KEY (`FeeId`) REFERENCES `fees` (`FeeId`);
-
---
--- Constraints for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`CustomerId`),
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`PackageId`) REFERENCES `packages` (`PackageId`),
-  ADD CONSTRAINT `bookings_ibfk_3` FOREIGN KEY (`TripTypeId`) REFERENCES `triptypes` (`TripTypeId`);
-
---
--- Constraints for table `creditcards`
---
-ALTER TABLE `creditcards`
-  ADD CONSTRAINT `creditcards_ibfk_1` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`CustomerId`);
-
---
 -- Constraints for table `customers`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`AgentId`) REFERENCES `agents` (`AgentId`);
-
---
--- Constraints for table `customers_rewards`
---
-ALTER TABLE `customers_rewards`
-  ADD CONSTRAINT `customers_rewards_ibfk_1` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`CustomerId`),
-  ADD CONSTRAINT `customers_rewards_ibfk_2` FOREIGN KEY (`RewardId`) REFERENCES `rewards` (`RewardId`);
-
---
--- Constraints for table `packages_products_suppliers`
---
-ALTER TABLE `packages_products_suppliers`
-  ADD CONSTRAINT `packages_products_suppliers_ibfk_1` FOREIGN KEY (`ProductSupplierId`) REFERENCES `products_suppliers` (`ProductSupplierId`),
-  ADD CONSTRAINT `packages_products_suppliers_ibfk_2` FOREIGN KEY (`PackageId`) REFERENCES `packages` (`PackageId`);
 
 --
 -- Constraints for table `products_suppliers`

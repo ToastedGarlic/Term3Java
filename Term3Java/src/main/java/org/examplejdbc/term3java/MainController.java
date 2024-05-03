@@ -28,8 +28,8 @@ public class MainController {
     public void setupTabContent() {
         tpCustomer.setContent(loadTabContent("CustomersTab.fxml"));
         tpPackages.setContent(loadTabContent("PackagesTab.fxml"));
-        tpBookings.setContent(loadTabContent("bookingsTab.fxml"));
         tpAgents.setContent(loadTabContent("agents-view.fxml"));
+        tpBookings.setContent(loadTabContent("bookingsTab.fxml"));
         tpMessenger.setContent(loadTabContent("messengerTab.fxml"));
     }
 
