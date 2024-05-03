@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Form that allows for the addition of BookingDetail entries in the travelexperts database,
+  - or allows for existing entries to be modified
+  - Created for workshop 6 of the term 3 threaded project
+  - Author: Brannon Howlett
+  - Date: 05/02/2024
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="frmAddModify" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.AddModifyBookingDetailsController">
+   <children>
+      <Label fx:id="lblTitle" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="419.0" text="Add/Modify Booking Details">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="69.0" text="Detail ID:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBookingDetailId" editable="false" layoutX="120.0" layoutY="70.0" prefHeight="25.0" prefWidth="175.0" />
+      <Label layoutX="309.0" layoutY="69.0" text="Itinerary No:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtItinerary" layoutX="460.0" layoutY="70.0" prefHeight="25.0" prefWidth="216.0" promptText="Please enter an itinerary number" />
+
+      <Label layoutX="17.0" layoutY="105.0" text="Start Date:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="179.0" text="Description:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="105.0" text="Booking No:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDestination" layoutX="120.0" layoutY="216.0" prefHeight="25.0" prefWidth="175.0" promptText="Please write a destination" />
+      <DatePicker fx:id="dateEnd" editable="false" layoutX="120.0" layoutY="142.0" promptText="Please select an end date" />
+      <DatePicker fx:id="dateStart" editable="false" layoutX="120.0" layoutY="106.0" promptText="Please select a start date" />
+      <ComboBox fx:id="cmbClass" layoutX="460.0" layoutY="180.0" onAction="#onClassSelect" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="309.0" layoutY="141.0" text="Region:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbBookingNo" layoutX="460.0" layoutY="106.0" onAction="#onBookingNoSelect" prefHeight="25.0" prefWidth="216.0" />
+      <Label layoutX="17.0" layoutY="215.0" text="Destination:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbRegion" layoutX="460.0" layoutY="142.0" onAction="#onRegionSelect" prefHeight="25.0" prefWidth="216.0" />
+      <Button fx:id="btnSubmit" layoutX="189.0" layoutY="360.0" mnemonicParsing="false" onAction="#onSubmitClick" prefHeight="36.0" prefWidth="120.0" text="Save" />
+      <Button fx:id="btnCancel" layoutX="334.0" layoutY="360.0" mnemonicParsing="false" onAction="#onCancelClick" prefHeight="36.0" prefWidth="120.0" text="Cancel" />
+      <Label layoutX="17.0" layoutY="140.0" text="End Date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtDescription" editable="true" layoutX="120.0" layoutY="180.0" prefHeight="25.0" prefWidth="175.0" promptText="Please write a description" />
+      <Label layoutX="17.0" layoutY="251.0" text="Base Price:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="289.0" text="Commission:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBasePrice" layoutX="120.0" layoutY="252.0" prefHeight="25.0" prefWidth="175.0" promptText="Please enter a base price" />
+      <TextField fx:id="txtCommission" layoutX="120.0" layoutY="290.0" prefHeight="25.0" prefWidth="175.0" promptText="Please enter a commission" />
+      <Label layoutX="309.0" layoutY="251.0" text="Product, Supplier:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="215.0" text="Fee:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="309.0" layoutY="179.0" text="Class:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbSupplier" layoutX="460.0" layoutY="252.0" onAction="#onProductSupplierSelect" prefHeight="25.0" prefWidth="216.0" />
+      <ComboBox fx:id="cmbFee" layoutX="460.0" layoutY="216.0" onAction="#onFeeSelect" prefHeight="25.0" prefWidth="216.0" />
+   </children>
+</Pane>
