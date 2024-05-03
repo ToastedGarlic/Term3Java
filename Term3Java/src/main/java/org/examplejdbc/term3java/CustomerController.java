@@ -20,7 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class CustomerController {
-
+    private Properties prop = new Properties();
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -116,16 +116,11 @@ public class CustomerController {
     }
 
     private void getCustomerInfo() {
-        Properties prop = new Properties();
-        String url = "";
-        String user = "";
-        String password = "";
-
         try (InputStream fis = getClass().getResourceAsStream("/config/connection.properties")) {
             prop.load(fis);
-            url = prop.getProperty("url");
-            user = prop.getProperty("user");
-            password = prop.getProperty("password");
+            String url = prop.getProperty("url");
+            String user = prop.getProperty("user");
+            String password = prop.getProperty("password");
 
             try (Connection conn = DriverManager.getConnection(url, user, password);
                  Statement stmt = conn.createStatement();
