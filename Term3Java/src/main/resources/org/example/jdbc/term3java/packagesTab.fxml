@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.jdbc.term3java.PackageController">
+    <VBox spacing="10"> <!-- VBox for vertical stacking -->
+        <children>
+            <TableView fx:id="tvPackages" prefHeight="477.0" prefWidth="916.0">
+                <columns>
+                    <TableColumn fx:id="colPackageId" prefWidth="75.0" text="Package Id" />
+                    <TableColumn fx:id="colPkgName" prefWidth="100.0" text="Package Name" />
+                    <TableColumn fx:id="colPkgStartDate" prefWidth="100.0" text="Start Date" />
+                    <TableColumn fx:id="colPkgEndDate" prefWidth="100.0" text="End Date" />
+                    <TableColumn fx:id="colPkgDesc" prefWidth="200.0" text="Description" />
+                    <TableColumn fx:id="colPkgBasePrice" prefWidth="100.0" text="Base Price" />
+                    <TableColumn fx:id="colPkgAgencyCommission" prefWidth="100.0" text="Agency Commission" />
+                </columns>
+            </TableView>
+            <HBox spacing="10" alignment="CENTER"> <!-- HBox for horizontal alignment of buttons -->
+                <children>
+                    <Button text="Add Package" onAction="#onAddPackage" />
+                    <Button text="Modify Package" onAction="#onModifyPackage" />
+                    <Button text="Delete Package" onAction="#onDeletePackage" />
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+</AnchorPane>

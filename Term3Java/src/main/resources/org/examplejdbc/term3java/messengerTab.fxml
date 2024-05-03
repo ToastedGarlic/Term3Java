@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.MessengerController">
+    <VBox spacing="10"> <!-- VBox for vertical stacking -->
+        <children>
+            <TableView fx:id="tvConversations" prefHeight="477.0" prefWidth="1142.0">
+                <columns>
+                    <TableColumn fx:id="colCustomerM" prefWidth="83.0" text="Customer" />
+                    <TableColumn fx:id="colAgentM" prefWidth="130.0" text="Agent" />
+               <TableColumn fx:id="colMessegeCount" prefWidth="137.0" text="Message Count" />
+                    <TableColumn fx:id="colActionRequired" prefWidth="187.0" text="Action Required" />
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" prefWidth="916.0" spacing="10"> <!-- HBox for horizontal alignment of buttons -->
+                <children>
+                    <Button onAction="#onConvoSelect" text="Access Conversation" />
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+</AnchorPane>
