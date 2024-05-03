@@ -2,9 +2,10 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.MainController">
+
     <top>
         <!-- MenuBar with MenuItems. Actions should be handled in the MainController -->
     </top>
@@ -17,6 +18,12 @@
                 <Tab fx:id="tpPackages" text="Packages">
                     <!-- Content loaded by the controller -->
                 </Tab>
+            <Tab fx:id="tpAgents" text="Agents">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+
                 <Tab fx:id="tpBookings" text="Bookings">
                     <!-- Content loaded by the controller -->
                 </Tab>
