@@ -174,7 +174,7 @@ public class CustomerController {
         String password = "";
 
         try {
-            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            InputStream fis = getClass().getResourceAsStream("/config/connection.properties");
             Properties prop = new Properties();
             prop.load(fis);
             url = (String) prop.get("url");
@@ -229,7 +229,7 @@ public class CustomerController {
         Customer selectedCustomer = tvCustomer.getSelectionModel().getSelectedItem();
 
         try {
-            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            InputStream fis = getClass().getResourceAsStream("/config/connection.properties");
             Properties prop = new Properties();
             prop.load(fis);
             url = (String) prop.get("url");

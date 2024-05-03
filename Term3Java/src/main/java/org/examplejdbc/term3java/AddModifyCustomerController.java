@@ -6,6 +6,7 @@ package org.examplejdbc.term3java;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
@@ -142,7 +143,7 @@ public class AddModifyCustomerController {
         String password = "";
 
         try {
-            FileInputStream fis = new FileInputStream("D:\\connection.properties");
+            InputStream fis = getClass().getResourceAsStream("/config/connection.properties");
             Properties prop = new Properties();
             prop.load(fis);
             url = (String) prop.get("url");
