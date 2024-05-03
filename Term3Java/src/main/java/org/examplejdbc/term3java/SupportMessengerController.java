@@ -1,19 +1,17 @@
 package org.examplejdbc.term3java;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Properties;
 
 public class SupportMessengerController {
@@ -28,15 +26,37 @@ public class SupportMessengerController {
     private Properties prop = new Properties(); // Declare it at the class level
     private Conversation convo;
     private MessengerController parentController;
-
-
+    private int custId;
+    private Thread taskThread;
+    Task task;
     // Set the mode of the form based on a provided Booking
     public void setMode(Conversation convo) {
         this.convo = convo;
         txtAgentM.setText(convo.getAgentName());
         txtCustM.setText(convo.getCustomerName());
+        custId = convo.getCustomerId();
         radioActionRequired.setSelected(convo.getMsgFlagged());
         getMessageInfo();
+        taskThread = new Thread(new Runnable() {
+            public void run() {
+                while(!Thread.currentThread().isInterrupted()){
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("THREAD RUNNING");
+                            getMessageInfo();
+                        }
+                    });
+                    try{
+                        Thread.sleep(1000);
+                    } catch(InterruptedException e){
+                        break;
+                    }
+                }
+            }
+        });
+        taskThread.start();
+
     }
 
     private void getMessageInfo() {
@@ -52,9 +72,10 @@ public class SupportMessengerController {
             // Connect to the database and fetch Bookings
             try (Connection conn = DriverManager.getConnection(url, user, password);
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery("SELECT c.MessageId, c.MsgDate, c.MsgContent " +
-                         "FROM `customers` b INNER JOIN messages c ON c.CustomerId = b.CustomerId " +
-                         "ORDER BY c.MessageId DESC")) {
+                 ResultSet rs = stmt.executeQuery("SELECT MessageId, MsgDate, MsgContent " +
+                         "FROM `messages`" +
+                         "WHERE CustomerId = " + custId + " " +
+                         "ORDER BY MessageId DESC")) {
                 while (rs.next()) {
                     if(rs.getString(2) != null && rs.getString(3) != null) {
 
