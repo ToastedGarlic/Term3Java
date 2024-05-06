@@ -21,6 +21,8 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Properties;
 
+//MessengerController.java
+//author: Michael Chessall
 public class MessengerController {
 
     @FXML
