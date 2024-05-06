@@ -1,3 +1,7 @@
+// Created by Mohsen Novin Pour as well as the inital template for this app,
+// Application has a class, controller and an xml that is used in the main-view.xml that launches
+// the secondary addmodify functionality, each team member created their tab for their own portion that is then used
+// in the maincontroller and mainview that navigate the user from one functionality to another and back.
 package org.examplejdbc.term3java;
 
 import javafx.event.ActionEvent;

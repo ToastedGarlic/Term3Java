@@ -1,3 +1,6 @@
+//Created by Mohsen Novin Pour, Controller for handling Crud functionality
+// for the package portion of the desktop App
+
 package org.examplejdbc.term3java;
 
 import javafx.collections.FXCollections;
@@ -15,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Properties;
 
 public class PackageController {
@@ -53,6 +57,23 @@ public class PackageController {
         tvPackages.setItems(packageList);
         loadPackages();
     }
+    private boolean validatePackage(Package packageToValidate) {
+        LocalDate startDate = LocalDate.parse(packageToValidate.getPkgStartDate());
+        LocalDate endDate = LocalDate.parse(packageToValidate.getPkgEndDate());
+
+
+        if (startDate.isAfter(endDate)) {
+            showAlert("Validation Error", "Start date cannot be after end date.");
+            return false;
+        }
+
+        if (packageToValidate.getPkgBasePrice() < 0 || packageToValidate.getPkgAgencyCommission() < 0) {
+            showAlert("Validation Error", "Price and commission cannot be negative.");
+            return false;
+        }
+
+        return true;
+    }
 
     private void loadPackages() {
         String url = prop.getProperty("url");
@@ -61,15 +82,15 @@ public class PackageController {
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT PackageId, PkgName, DATE(PkgStartDate) AS PkgStartDate, DATE(PkgEndDate) AS PkgEndDate, PkgDesc, PkgBasePrice, PkgAgencyCommission FROM packages")) {
+             ResultSet rs = stmt.executeQuery("SELECT * FROM packages")) {
 
             packageList.clear();
             while (rs.next()) {
                 Package pack = new Package(
                         rs.getInt("PackageId"),
                         rs.getString("PkgName"),
-                        rs.getString("PkgStartDate"),
-                        rs.getString("PkgEndDate"),
+                        rs.getString("PkgStartDate").substring(0, 10),
+                        rs.getString("PkgEndDate").substring(0, 10),
                         rs.getString("PkgDesc"),
                         rs.getDouble("PkgBasePrice"),
                         rs.getDouble("PkgAgencyCommission")
@@ -81,6 +102,7 @@ public class PackageController {
             showAlert("Error", "Failed to load package data.");
         }
     }
+
 
     @FXML
     private void onAddPackage(ActionEvent event) {
@@ -130,14 +152,17 @@ public class PackageController {
             dialogStage.initOwner(tvPackages.getScene().getWindow());
             dialogStage.setScene(new Scene(root));
             dialogStage.showAndWait();
-            loadPackages(); // Refresh list after
+            loadPackages(); // Refresh list after modification
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Failed to open package dialog.");
         }
     }
 
+
     public void addPackage(Package newPackage) {
+        if (!validatePackage(newPackage)) return;
+
         String url = prop.getProperty("url");
         String user = prop.getProperty("user");
         String password = prop.getProperty("password");
@@ -146,8 +171,8 @@ public class PackageController {
              PreparedStatement pstmt = conn.prepareStatement("INSERT INTO packages (PkgName, PkgStartDate, PkgEndDate, PkgDesc, PkgBasePrice, PkgAgencyCommission) VALUES (?, ?, ?, ?, ?, ?)")) {
 
             pstmt.setString(1, newPackage.getPkgName());
-            pstmt.setString(2, newPackage.getPkgStartDate());
-            pstmt.setString(3, newPackage.getPkgEndDate());
+            pstmt.setDate(2, Date.valueOf(newPackage.getPkgStartDate()));
+            pstmt.setDate(3, Date.valueOf(newPackage.getPkgEndDate()));
             pstmt.setString(4, newPackage.getPkgDesc());
             pstmt.setDouble(5, newPackage.getPkgBasePrice());
             pstmt.setDouble(6, newPackage.getPkgAgencyCommission());
@@ -164,6 +189,8 @@ public class PackageController {
     }
 
     public void updatePackage(Package packageToUpdate) {
+        if (!validatePackage(packageToUpdate)) return;
+
         String url = prop.getProperty("url");
         String user = prop.getProperty("user");
         String password = prop.getProperty("password");
@@ -172,8 +199,8 @@ public class PackageController {
              PreparedStatement pstmt = conn.prepareStatement("UPDATE packages SET PkgName=?, PkgStartDate=?, PkgEndDate=?, PkgDesc=?, PkgBasePrice=?, PkgAgencyCommission=? WHERE PackageId=?")) {
 
             pstmt.setString(1, packageToUpdate.getPkgName());
-            pstmt.setString(2, packageToUpdate.getPkgStartDate());
-            pstmt.setString(3, packageToUpdate.getPkgEndDate());
+            pstmt.setDate(2, Date.valueOf(packageToUpdate.getPkgStartDate()));
+            pstmt.setDate(3, Date.valueOf(packageToUpdate.getPkgEndDate()));
             pstmt.setString(4, packageToUpdate.getPkgDesc());
             pstmt.setDouble(5, packageToUpdate.getPkgBasePrice());
             pstmt.setDouble(6, packageToUpdate.getPkgAgencyCommission());
@@ -189,6 +216,7 @@ public class PackageController {
             showAlert("Error", "Failed to update the package.");
         }
     }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
