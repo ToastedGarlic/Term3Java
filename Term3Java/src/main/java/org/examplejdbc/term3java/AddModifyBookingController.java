@@ -94,6 +94,7 @@ public class AddModifyBookingController {
         setupPackages();
         setupTripTypes();
         dateBookingDate.getEditor().setDisable(true);
+
         dateBookingDate.getEditor().setOpacity(1);
     }
 

@@ -1,29 +1,32 @@
 package org.examplejdbc.term3java;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import java.time.LocalDate;
 
 public class AddModifyPackageController {
 
     @FXML private TextField txtPkgName;
-    @FXML private TextField txtPkgStartDate;
-    @FXML private TextField txtPkgEndDate;
+    @FXML private DatePicker dpPkgStartDate;
+    @FXML private DatePicker dpPkgEndDate;
     @FXML private TextField txtPkgDesc;
     @FXML private TextField txtPkgBasePrice;
     @FXML private TextField txtPkgAgencyCommission;
+    @FXML private Button btnSave;
+    @FXML private Button btnCancel;
 
     private Package existingPackage;
     private PackageController parentController;
 
-    // Set the mode of the form based on a provided package
+    // Set the mode of the form based on a provided Package
     public void setMode(Package packageToModify) {
-        if (packageToModify != null) {
-            this.existingPackage = packageToModify;
+        this.existingPackage = packageToModify;
+        if (existingPackage != null) {
             txtPkgName.setText(existingPackage.getPkgName());
-            txtPkgStartDate.setText(existingPackage.getPkgStartDate());
-            txtPkgEndDate.setText(existingPackage.getPkgEndDate());
+            dpPkgStartDate.setValue(LocalDate.parse(existingPackage.getPkgStartDate().substring(0, 10)));
+            dpPkgEndDate.setValue(LocalDate.parse(existingPackage.getPkgEndDate().substring(0, 10)));
             txtPkgDesc.setText(existingPackage.getPkgDesc());
             txtPkgBasePrice.setText(String.valueOf(existingPackage.getPkgBasePrice()));
             txtPkgAgencyCommission.setText(String.valueOf(existingPackage.getPkgAgencyCommission()));
@@ -34,26 +37,24 @@ public class AddModifyPackageController {
     @FXML
     private void onSave(ActionEvent event) {
         if (existingPackage != null) {
-            // Update existing package
+            // Update existing Package
             existingPackage.setPkgName(txtPkgName.getText());
-            existingPackage.setPkgStartDate(txtPkgStartDate.getText());
-            existingPackage.setPkgEndDate(txtPkgEndDate.getText());
+            existingPackage.setPkgStartDate(dpPkgStartDate.getValue().toString());
+            existingPackage.setPkgEndDate(dpPkgEndDate.getValue().toString());
             existingPackage.setPkgDesc(txtPkgDesc.getText());
             existingPackage.setPkgBasePrice(Double.parseDouble(txtPkgBasePrice.getText()));
             existingPackage.setPkgAgencyCommission(Double.parseDouble(txtPkgAgencyCommission.getText()));
-
             parentController.updatePackage(existingPackage);
         } else {
-            // Create new package
+            // Create new Package
             Package newPackage = new Package(
                     txtPkgName.getText(),
-                    txtPkgStartDate.getText(),
-                    txtPkgEndDate.getText(),
+                    dpPkgStartDate.getValue().toString(),
+                    dpPkgEndDate.getValue().toString(),
                     txtPkgDesc.getText(),
                     Double.parseDouble(txtPkgBasePrice.getText()),
                     Double.parseDouble(txtPkgAgencyCommission.getText())
             );
-
             parentController.addPackage(newPackage);
         }
         closeStage(event);
@@ -61,12 +62,19 @@ public class AddModifyPackageController {
 
     // Close the dialog window
     public void closeStage(ActionEvent event) {
-        Stage stage = (Stage) txtPkgName.getScene().getWindow();
+        Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }
 
     // Method to set the parent controller
     public void setParentController(PackageController parent) {
         this.parentController = parent;
+    }
+
+    // Displays an alert dialog
+    private void showAlert(String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, content, ButtonType.OK);
+        alert.setHeaderText(header);
+        alert.showAndWait();
     }
 }

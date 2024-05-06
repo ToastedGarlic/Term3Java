@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="467.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.examplejdbc.term3java.AgentController">
     <children>
 
-        <TableView fx:id="tvAgents" prefHeight="390.0" prefWidth="659.0">
+        <TableView fx:id="tvAgents" prefHeight="390.0" prefWidth="1142.0">
             <columns>
                 <TableColumn fx:id="colAgentId" prefWidth="68.33331298828125" text="Agent Id" />
                 <TableColumn fx:id="colFName" prefWidth="81.66668701171875" text="First Name" />
