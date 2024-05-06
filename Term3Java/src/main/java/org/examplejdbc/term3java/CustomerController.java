@@ -21,9 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -153,16 +151,36 @@ public class CustomerController {
         btnModifyCustomer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(tvCustomer.getSelectionModel().getSelectedItem().getCustomerId());
-                mode = "edit";
-                openDialog(tvCustomer.getSelectionModel().getSelectedItem(), mode);
+                if(tvCustomer.getSelectionModel().getSelectedItem()!=null) {
+                    mode = "edit";
+                    openDialog(tvCustomer.getSelectionModel().getSelectedItem(), mode);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("No Customer Selected");
+                    alert.setContentText("Please Select a Customer");
+
+                    // Show the warning alert
+                    alert.showAndWait();
+                }
+
             }
         });
 
         btnDeleteCustomer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                deleteCustomer();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Delete Customer");
+                alert.setHeaderText(null);
+                alert.setContentText("Are you sure you want to delete this customer?");
+                alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        deleteCustomer();
+                    }
+                });
+
             }
         });
     }

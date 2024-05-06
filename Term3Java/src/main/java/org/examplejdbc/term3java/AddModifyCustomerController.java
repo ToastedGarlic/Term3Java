@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+//code by Jack
+
 public class AddModifyCustomerController {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
