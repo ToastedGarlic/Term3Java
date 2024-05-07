@@ -1,3 +1,7 @@
+// Created by Mohsen Novin Pour as well as the inital template for this app,
+// Application has a class, controller and an xml that is used in the main-view.xml that launches
+// the secondary addmodify functionality, each team member created their tab for their own portion that is then used
+// in the maincontroller and mainview that navigate the user from one functionality to another and back.
 package org.examplejdbc.term3java;
 
 import javafx.event.ActionEvent;
@@ -19,6 +23,8 @@ public class MainController {
     private Tab tpMessenger;
     @FXML
     private Tab tpAgents;
+    @FXML
+    private Tab tpBookingDetails;
 
     @FXML
     public void initialize() {
@@ -31,6 +37,8 @@ public class MainController {
         tpAgents.setContent(loadTabContent("agents-view.fxml"));
         tpBookings.setContent(loadTabContent("bookingsTab.fxml"));
         tpMessenger.setContent(loadTabContent("messengerTab.fxml"));
+        tpBookingDetails.setContent(loadTabContent("bookingdetailsTab.fxml"));
+
     }
 
     private AnchorPane loadTabContent(String fxmlFile) {

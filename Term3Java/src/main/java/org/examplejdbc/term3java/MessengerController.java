@@ -21,6 +21,8 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Properties;
 
+//MessengerController.java
+//author: Michael Chessall
 public class MessengerController {
 
     @FXML
@@ -78,7 +80,7 @@ public class MessengerController {
             }
         } catch (IOException | SQLException e) {
             e.printStackTrace(); // Consider more user-friendly error handling
-            showAlert("Error", "Cannot load Conversation information.");
+            //showAlert("Error", "Cannot load Conversation information.");
         }
         tvConversations.setItems(convoList);
     }

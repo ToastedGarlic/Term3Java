@@ -14,6 +14,9 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
+//SupportMessengerController.java
+//author: Michael Chessall
+
 public class SupportMessengerController {
 
     @FXML private TextField txtCustM;
@@ -29,7 +32,7 @@ public class SupportMessengerController {
     private int custId;
     private Thread taskThread;
     Task task;
-    // Set the mode of the form based on a provided Booking
+
     public void setMode(Conversation convo) {
         this.convo = convo;
         txtAgentM.setText(convo.getAgentName());
