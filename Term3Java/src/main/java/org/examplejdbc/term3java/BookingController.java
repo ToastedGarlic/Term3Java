@@ -21,6 +21,9 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.Properties;
 
+
+//BookingController.java
+//author: Michael Chessall
 public class BookingController {
 
     @FXML private TableView<Booking> tvBookings;

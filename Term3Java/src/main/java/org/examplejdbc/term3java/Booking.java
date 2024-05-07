@@ -4,6 +4,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+//Booking.java
+//author: Michael Chessall
 public class Booking {
     private SimpleIntegerProperty BookingId;
     private SimpleStringProperty BookingDate;

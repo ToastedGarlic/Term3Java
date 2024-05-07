@@ -13,7 +13,8 @@ import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.Properties;
-
+//AddModifyBookingController.java
+//author: Michael Chessall
 public class AddModifyBookingController {
 
     @FXML private TextField txtBookingId;
