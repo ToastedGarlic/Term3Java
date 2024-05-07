@@ -57,8 +57,6 @@ public class AgentDialogueController {
     @FXML // fx:id="btnSave"
     private Button btnSave; // Value injected by FXMLLoader
 
-    @FXML // fx:id="btnDelete"
-    private Button btnDelete; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnCancel"
     private Button btnCancel; // Value injected by FXMLLoader
@@ -81,7 +79,6 @@ public class AgentDialogueController {
         assert tfAgtPosition != null : "fx:id=\"tfAgtPosition\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert tfAgencyId != null : "fx:id=\"tfAgencyId\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert btnSave != null : "fx:id=\"btnSave\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
-        assert btnDelete != null : "fx:id=\"btnDelete\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
         assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'agentdialogue-view.fxml'.";
 
 
